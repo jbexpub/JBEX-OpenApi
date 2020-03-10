@@ -84,7 +84,7 @@ class Request(object):
             kwargs[date_type]['signature'] = self._generate_signature(kwargs[date_type])
 
         kwargs['headers'] = {
-            'X-JB-APIKEY': self.api_key,
+            'X-BH-APIKEY': self.api_key,
             'User-Agent': user_agent
         }
 

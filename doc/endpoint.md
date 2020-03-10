@@ -1,4 +1,4 @@
-# Api Endpoints for BlueHelix Broker
+# Api Endpoints for JBEX Broker
 
 Name | base endpoint
 ------------ | ------------

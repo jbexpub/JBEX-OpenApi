@@ -1,6 +1,9 @@
 import logging
 import time
 
+import sys
+sys.path.append('..')
+
 from broker.client import BrokerClient
 
 if __name__ == '__main__':
@@ -14,7 +17,7 @@ if __name__ == '__main__':
         "https": "",
     }
 
-    entry_point = ''  # like: https://api.xxx.yyy/openapi/ where xxx.yyy is your base domain
+    entry_point = 'http://www.jbex.com/openapi'  # like: https://api.xxx.yyy/openapi/ where xxx.yyy is your base domain
     b = BrokerClient(entry_point, api_key='', secret='', proxies=proxies)
 
     print(b.time())

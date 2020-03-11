@@ -6,7 +6,7 @@ public class BrokerConstants {
 
     public static final long DEFAULT_RECEIVING_WINDOW = 5_000L;
 
-    public static final String API_KEY_HEADER = "X-JB-APIKEY";
+    public static final String API_KEY_HEADER = "X-BH-APIKEY";
 
     /**
      * Decorator to indicate that an endpoint requires an API key.

@@ -85,9 +85,9 @@
 * MINUTE
 * DAY
 
-# 通用接口
+## 通用接口
 
-## 测试连接
+### 测试连接
 
 ```shell
 GET /openapi/v1/ping
@@ -107,7 +107,7 @@ NONE
 {}
 ```
 
-## 服务器时间
+### 服务器时间
 
 ```shell
 GET /openapi/v1/time
@@ -129,7 +129,7 @@ NONE
 }
 ```
 
-## Broker信息
+### Broker信息
 
 ```shell
 GET /openapi/v1/brokerInfo
@@ -192,9 +192,9 @@ NONE
 }
 ```
 
-# 市场数据接口
+## 行情接口
 
-## 订单簿
+### 订单簿
 
 ```shell
 GET /openapi/quote/v1/depth
@@ -248,7 +248,7 @@ limit | INT | NO | 默认 100; 最大 100.
 }
 ```
 
-## 最近成交
+### 最近成交
 
 ```shell
 GET /openapi/quote/v1/trades
@@ -279,7 +279,7 @@ limit | INT | NO | Default 500; max 1000.
 ]
 ```
 
-## k线/烛线图数据
+### k线/烛线图数据
 
 ```shell
 GET /openapi/quote/v1/klines
@@ -323,7 +323,7 @@ limit | INT | NO | 默认500; 最大1000.
 ]
 ```
 
-## 24小时ticker价格变化数据
+### 24小时ticker价格变化数据
 
 ```shell
 GET /openapi/quote/v1/ticker/24hr
@@ -375,7 +375,7 @@ OR
 ]
 ```
 
-## Symbol价格
+### Symbol价格
 
 ```shell
 GET /openapi/quote/v1/ticker/price
@@ -417,7 +417,7 @@ OR
 ]
 ```
 
-## Symbol最佳订单簿价格
+### Symbol最佳订单簿价格
 
 ```shell
 GET /openapi/quote/v1/ticker/bookTicker
@@ -469,9 +469,9 @@ OR
 ]
 ```
 
-# 账户接口
+## 账户接口
 
-## 创建新订单  (TRADE)
+### 创建新订单  (TRADE)
 
 ```shell
 POST /openapi/v1/order  (HMAC SHA256)
@@ -521,7 +521,7 @@ timestamp | LONG | YES |
 }
 ```
 
-## 测试新订单 (TRADE)
+### 测试新订单 (TRADE)
 
 ```shell
 POST /openapi/v1/order/test (HMAC SHA256)
@@ -543,7 +543,7 @@ POST /openapi/v1/order/test (HMAC SHA256)
 {}
 ```
 
-## 查询订单 (USER_DATA)
+### 查询订单 (USER_DATA)
 
 ```shell
 GET /openapi/v1/order (HMAC SHA256)
@@ -591,7 +591,7 @@ Notes:
 }
 ```
 
-## 取消订单 (TRADE)
+### 取消订单 (TRADE)
 
 ```shell
 DELETE /openapi/v1/order  (HMAC SHA256)
@@ -624,7 +624,7 @@ timestamp | LONG | YES |
 }
 ```
 
-## 当前订单(USER_DATA)
+### 当前订单(USER_DATA)
 
 ```shell
 GET /openapi/v1/openOrders  (HMAC SHA256)
@@ -674,7 +674,7 @@ timestamp | LONG | YES |
 ]
 ```
 
-## 历史订单 (USER_DATA)
+### 历史订单 (USER_DATA)
 
 ```shell
 GET /openapi/v1/historyOrders (HMAC SHA256)
@@ -725,7 +725,7 @@ timestamp | LONG | YES |
 ]
 ```
 
-## 账户信息 (USER_DATA)
+### 账户信息 (USER_DATA)
 
 ```shell
 GET /openapi/v1/account (HMAC SHA256)
@@ -766,7 +766,7 @@ timestamp | LONG | YES |
 }
 ```
 
-## 账户交易记录 (USER_DATA)
+### 账户交易记录 (USER_DATA)
 
 ```shell
 GET /openapi/v1/myTrades  (HMAC SHA256)
@@ -815,7 +815,7 @@ timestamp | LONG | YES |
 ]
 ```
 
-## 账户存款记录 (USER_DATA)
+### 账户存款记录 (USER_DATA)
 
 ```shell
 GET /openapi/v1/depositOrders  (HMAC SHA256)
@@ -857,7 +857,7 @@ timestamp | LONG | YES |
   }
 ]
 ```
-## 子账户列表(SUB_ACCOUNT_LIST)
+### 子账户列表(SUB_ACCOUNT_LIST)
 
 ```shell
 POST /openapi/v1/subAccount/query
@@ -902,7 +902,7 @@ POST /openapi/v1/subAccount/query
     },
 ]
 ```
-## 账户内转账 (ACCOUNT_TRANSFER)
+### 账户内转账 (ACCOUNT_TRANSFER)
 
 ```shell
 POST /openapi/v1/transfer
@@ -940,7 +940,7 @@ amount | STRING | YES | 转账数量
 
 3、**子账户Api调用的时候只能从当前子账户向主账户(钱包账户)转账，所以fromAccountType\fromAccountIndex\toAccountType\toAccountIndex不用填**
 
-## 查询流水 (BALANCE_FLOW)
+### 查询流水 (BALANCE_FLOW)
 
 ```shell
 POST /openapi/v1/balance_flow
@@ -1025,11 +1025,11 @@ OTC|OTC_TRADE|200|旧版 OTC 流水
 活动|AIRDROP|70|空投
 活动|MINE_REWARD|71|挖矿奖励
 
-# 用户数据流接口
+## 用户数据流接口
 
 详细的用户信息流说明在另一个文档中。
 
-## 开始用户信息流 (USER_STREAM)
+### 开始用户信息流 (USER_STREAM)
 
 ```shell
 POST /openapi/v1/userDataStream
@@ -1055,7 +1055,7 @@ timestamp | LONG | YES |
 }
 ```
 
-## Keepalive用户信息流 (USER_STREAM)
+### Keepalive用户信息流 (USER_STREAM)
 
 ```shell
 PUT /openapi/v1/userDataStream
@@ -1080,7 +1080,7 @@ timestamp | LONG | YES |
 {}
 ```
 
-## 关闭用户信息流 (USER_STREAM)
+### 关闭用户信息流 (USER_STREAM)
 
 ```shell
 DELETE /openapi/v1/userDataStream
@@ -1104,14 +1104,14 @@ timestamp | LONG | YES |
 ```javascript
 {}
 ```
-# 过滤层
+## 过滤层
 
 过滤层（filter）定义某个broker的某个symbol的交易规则
 过滤层（filter）有两个大类：`symbol filters` 和 `broker filters`
 
-## Symbol过滤层
+### Symbol过滤层
 
-### PRICE_FILTER
+#### PRICE_FILTER
 
 `PRICE_FILTER` 定义某个symbol的`price` 精度. 一共有3个部分：
 
@@ -1136,7 +1136,7 @@ timestamp | LONG | YES |
   }
 ```
 
-### LOT_SIZE
+#### LOT_SIZE
 
 `LOT_SIZE` 过滤层定义某个symbol `quantity`(在拍卖行里又称为"lots"）的精度。 一共有三个部分：
 
@@ -1161,7 +1161,7 @@ timestamp | LONG | YES |
   }
 ```
 
-### MIN_NOTIONAL
+#### MIN_NOTIONAL
 
 `MIN_NOTIONAL` 过滤层定义某个symbol的名义金额精度。一个订单的名义金额为 `price` * `quantity`.
 
@@ -1174,7 +1174,7 @@ timestamp | LONG | YES |
   }
 ```
 
-### MAX_NUM_ORDERS
+#### MAX_NUM_ORDERS
 
 `MAX_NUM_ORDERS` 过滤层定义账户在某个symbol上的最大挂单数。请注意，此过滤层同时计算“算法”订单和普通订单。
 
@@ -1187,7 +1187,7 @@ timestamp | LONG | YES |
   }
 ```
 
-### MAX_NUM_ALGO_ORDERS
+#### MAX_NUM_ALGO_ORDERS
 
 `MAX_ALGO_ORDERS` 过滤层定义账户在某个symbol上的最大“算法”挂单数。“算法”订单包括`STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`等订单类型。
 
@@ -1200,7 +1200,7 @@ timestamp | LONG | YES |
   }
 ```
 
-### ICEBERG_PARTS
+#### ICEBERG_PARTS
 
 `ICEBERG_PARTS` 过滤层定义冰山订单部件的最大值。`ICEBERG_PARTS`的定义为`CEIL(qty / icebergQty)`.
 
@@ -1213,9 +1213,9 @@ timestamp | LONG | YES |
   }
 ```
 
-## Broker Filters
+### Broker Filters
 
-### BROKER_MAX_NUM_ORDERS
+#### BROKER_MAX_NUM_ORDERS
 
 `BROKER_MAX_NUM_ORDERS` 过滤层定义账户在broker上的最大挂单数。请注意，此过滤层同时计算“算法”订单和普通订单。
 
@@ -1228,7 +1228,7 @@ timestamp | LONG | YES |
   }
 ```
 
-### BROKER_MAX_NUM_ALGO_ORDERS
+#### BROKER_MAX_NUM_ALGO_ORDERS
 
 `BROKER_MAX_NUM_ALGO_ORDERS` 过滤层定义账户在broker上的最大“算法”挂单数。“算法”订单包括`STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`等订单类型。
 

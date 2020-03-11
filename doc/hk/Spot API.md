@@ -85,9 +85,9 @@ m -> 分鐘; h -> 小時; d -> 天; w -> 周; M -> 月
 * MINUTE
 * DAY
 
-# 通用接口
+## 通用接口
 
-## 測試連接
+### 測試連接
 
 ```shell
 GET /openapi/v1/ping
@@ -107,7 +107,7 @@ NONE
 {}
 ```
 
-## 伺服器時間
+### 伺服器時間
 
 ```shell
 GET /openapi/v1/time
@@ -129,7 +129,7 @@ NONE
 }
 ```
 
-## Broker資訊
+### Broker資訊
 
 ```shell
 GET /openapi/v1/brokerInfo
@@ -192,9 +192,9 @@ NONE
 }
 ```
 
-# 市場數據接口
+## 行情接口
 
-## 訂單簿
+### 訂單簿
 
 ```shell
 GET /openapi/quote/v1/depth
@@ -248,7 +248,7 @@ limit | INT | NO | 默認 100; 最大 100.
 }
 ```
 
-## 最近成交
+### 最近成交
 
 ```shell
 GET /openapi/quote/v1/trades
@@ -279,7 +279,7 @@ limit | INT | NO | Default 500; max 1000.
 ]
 ```
 
-## k線/燭線圖數據
+### k線/燭線圖數據
 
 ```shell
 GET /openapi/quote/v1/klines
@@ -323,7 +323,7 @@ limit | INT | NO | 默認500; 最大1000.
 ]
 ```
 
-## 24小時ticker價格變化數據
+### 24小時ticker價格變化數據
 
 ```shell
 GET /openapi/quote/v1/ticker/24hr
@@ -375,7 +375,7 @@ OR
 ]
 ```
 
-## Symbol價格
+### Symbol價格
 
 ```shell
 GET /openapi/quote/v1/ticker/price
@@ -417,7 +417,7 @@ OR
 ]
 ```
 
-## Symbol最佳訂單簿價格
+### Symbol最佳訂單簿價格
 
 ```shell
 GET /openapi/quote/v1/ticker/bookTicker
@@ -469,9 +469,9 @@ OR
 ]
 ```
 
-# 帳戶接口
+## 帳戶接口
 
-## 創建新訂單 (TRADE)
+### 創建新訂單 (TRADE)
 
 ```shell
 POST /openapi/v1/order (HMAC SHA256)
@@ -520,7 +520,7 @@ timestamp | LONG | YES |
 }
 ```
 
-## 測試新訂單 (TRADE)
+### 測試新訂單 (TRADE)
 
 ```shell
 POST /openapi/v1/order/test (HMAC SHA256)
@@ -542,7 +542,7 @@ POST /openapi/v1/order/test (HMAC SHA256)
 {}
 ```
 
-## 查詢訂單 (USER_DATA)
+### 查詢訂單 (USER_DATA)
 
 ```shell
 GET /openapi/v1/order (HMAC SHA256)
@@ -590,7 +590,7 @@ Notes:
 }
 ```
 
-## 取消訂單 (TRADE)
+### 取消訂單 (TRADE)
 
 ```shell
 DELETE /openapi/v1/order (HMAC SHA256)
@@ -623,7 +623,7 @@ timestamp | LONG | YES |
 }
 ```
 
-## 當前訂單(USER_DATA)
+### 當前訂單(USER_DATA)
 
 ```shell
 GET /openapi/v1/openOrders (HMAC SHA256)
@@ -673,7 +673,7 @@ timestamp | LONG | YES |
 ]
 ```
 
-## 歷史訂單 (USER_DATA)
+### 歷史訂單 (USER_DATA)
 
 ```shell
 GET /openapi/v1/historyOrders (HMAC SHA256)
@@ -724,7 +724,7 @@ timestamp | LONG | YES |
 ]
 ```
 
-## 帳戶資訊 (USER_DATA)
+### 帳戶資訊 (USER_DATA)
 
 ```shell
 GET /openapi/v1/account (HMAC SHA256)
@@ -765,7 +765,7 @@ timestamp | LONG | YES |
 }
 ```
 
-## 帳戶交易記錄 (USER_DATA)
+### 帳戶交易記錄 (USER_DATA)
 
 ```shell
 GET /openapi/v1/myTrades (HMAC SHA256)
@@ -814,7 +814,7 @@ timestamp | LONG | YES |
 ]
 ```
 
-## 帳戶存款記錄 (USER_DATA)
+### 帳戶存款記錄 (USER_DATA)
 
 ```shell
 GET /openapi/v1/depositOrders (HMAC SHA256)
@@ -857,7 +857,7 @@ timestamp | LONG | YES |
 ]
 ```
 
-## 子帳戶列表(SUB_ACCOUNT_LIST)
+### 子帳戶列表(SUB_ACCOUNT_LIST)
 
 ```shell
 POST /openapi/v1/subAccount/query
@@ -903,7 +903,7 @@ POST /openapi/v1/subAccount/query
 ]
 ```
 
-## 帳戶內轉賬 (ACCOUNT_TRANSFER)
+### 帳戶內轉賬 (ACCOUNT_TRANSFER)
 
 ```shell
 POST /openapi/v1/transfer
@@ -941,7 +941,7 @@ amount | STRING | YES | 轉賬數量
 
 3、**子帳戶Api調用的時候只能從當前子帳戶向主帳戶(錢包帳戶)轉賬，所以fromAccountType\fromAccountIndex\toAccountType\toAccountIndex不用填**
 
-## 查詢流水 (BALANCE_FLOW)
+### 查詢流水 (BALANCE_FLOW)
 
 ```shell
 POST /openapi/v1/balance_flow
@@ -1026,11 +1026,11 @@ OTC|OTC_TRADE|200|舊版 OTC 流水
 活動|AIRDROP|70|空投
 活動|MINE_REWARD|71|挖礦獎勵
 
-# 用戶數據流接口
+## 用戶數據流接口
 
 詳細的用戶資訊流說明在另一個文檔中。
 
-## 開始用戶資訊流 (USER_STREAM)
+### 開始用戶資訊流 (USER_STREAM)
 
 ```shell
 POST /openapi/v1/userDataStream
@@ -1056,7 +1056,7 @@ timestamp | LONG | YES |
 }
 ```
 
-## Keepalive用戶資訊流 (USER_STREAM)
+### Keepalive用戶資訊流 (USER_STREAM)
 
 ```shell
 PUT /openapi/v1/userDataStream
@@ -1081,7 +1081,7 @@ timestamp | LONG | YES |
 {}
 ```
 
-## 關閉用戶資訊流 (USER_STREAM)
+### 關閉用戶資訊流 (USER_STREAM)
 
 ```shell
 DELETE /openapi/v1/userDataStream
@@ -1106,14 +1106,14 @@ timestamp | LONG | YES |
 {}
 ```
 
-# 過濾層
+## 過濾層
 
 過濾層（filter）定義某個broker的某個symbol的交易規則
 過濾層（filter）有兩個大類：`symbol filters` 和 `broker filters`
 
-## Symbol過濾層
+### Symbol過濾層
 
-### PRICE_FILTER
+#### PRICE_FILTER
 
 `PRICE_FILTER` 定義某個symbol的`price` 精度. 一共有3個部分：
 
@@ -1138,7 +1138,7 @@ timestamp | LONG | YES |
 }
 ```
 
-### LOT_SIZE
+#### LOT_SIZE
 
 `LOT_SIZE` 過濾層定義某個symbol `quantity`(在拍賣行裏又稱為"lots"）的精度。 一共有三個部分：
 
@@ -1163,7 +1163,7 @@ timestamp | LONG | YES |
 }
 ```
 
-### MIN_NOTIONAL
+#### MIN_NOTIONAL
 
 `MIN_NOTIONAL` 過濾層定義某個symbol的名義金額精度。一個訂單的名義金額為 `price` * `quantity`.
 
@@ -1176,7 +1176,7 @@ timestamp | LONG | YES |
 }
 ```
 
-### MAX_NUM_ALGO_ORDERS
+#### MAX_NUM_ALGO_ORDERS
 
 `MAX_ALGO_ORDERS` 過濾層定義賬戶在某個symbol上的最大“算法”掛單數。“算法”訂單包括`STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`等訂單類型。
 
@@ -1189,7 +1189,7 @@ timestamp | LONG | YES |
   }
 ```
 
-### ICEBERG_PARTS
+#### ICEBERG_PARTS
 
 `ICEBERG_PARTS` 過濾層定義冰山訂單部件的最大值。`ICEBERG_PARTS`的定義為`CEIL(qty / icebergQty)`.
 
@@ -1202,9 +1202,9 @@ timestamp | LONG | YES |
   }
 ```
 
-## Broker Filters
+### Broker Filters
 
-### BROKER_MAX_NUM_ORDERS
+#### BROKER_MAX_NUM_ORDERS
 
 `BROKER_MAX_NUM_ORDERS` 過濾層定義賬戶在broker上的最大掛單數。請註意，此過濾層同時計算“算法”訂單和普通訂單。
 
@@ -1217,7 +1217,7 @@ timestamp | LONG | YES |
   }
 ```
 
-### BROKER_MAX_NUM_ALGO_ORDERS
+#### BROKER_MAX_NUM_ALGO_ORDERS
 
 `BROKER_MAX_NUM_ALGO_ORDERS` 過濾層定義賬戶在broker上的最大“算法”掛單數。“算法”訂單包括`STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`等訂單類型。
 

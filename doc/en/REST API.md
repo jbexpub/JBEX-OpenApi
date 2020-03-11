@@ -179,5 +179,4 @@ timestamp | 1538323200000
 [linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://$HOST/openapi/v1/order?symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=885c9e3dd89ccd13408b25e6d54c2330703759d7494bea6dd5a3d1fd16ba3afa'
 ```
 
-Note that the signature is different in example 3.
-There is no & between "GTC" and "quantity=1".
+***Note that the signature is different in example 3. There is no & between "GTC" and "quantity=1".***

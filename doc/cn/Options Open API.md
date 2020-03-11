@@ -2,26 +2,26 @@
 
 Broker Open API的地址请见[这里](endpoint.md)
 
-# 公共接口
+## 公共接口
 
-## `brokerInfo`
+### `brokerInfo`
 
 获取当前broker的交易规则和symbol的信息（精度单位等信息）
 
-### **Request Weight:**
+#### **Request Weight:**
 
 0
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/v1/brokerInfo
 ```
 
-### **Parameters:**
+#### **Parameters:**
 
 None
 
-### **Response:**
+#### **Response:**
 名称|类型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `timezone`|string|`UTC`|服务器所在时区
@@ -56,7 +56,7 @@ None
 `stepSize`|float|`0.001`|期权交易张数精度
 `minNotional`|float|`1`|订单金额精度 (数量 * 价格)
 
-### **Example:**
+#### **Example:**
 ```js
 {
   'timezone': 'UTC',
@@ -96,25 +96,25 @@ None
       }      
 ```
 
-## `getOptions`
+### `getOptions`
 
 获取所有正在交易和已经交割的期权信息。如果需要获取历史期权信息，需要将`expired`设置成`true`
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request URL:**
+#### **Request URL:**
 ```
 GET /openapi/v1/getOptions
 ```
 
-### **Parameters：**
+#### **Parameters：**
 名称|类型|是否强制|默认|描述
 ------------ | ------------ | ------------ | ------------ | -----
 `expired`|string|`NO`|`false`|设置为`true`来展示历史期权，可以用来获取历史期权信息。
 
-### **Response:**
+#### **Response:**
 
 名称|类型|例子|描述
 ------------ | ------------ | ------------ | ------------
@@ -129,7 +129,7 @@ GET /openapi/v1/getOptions
 
 
 
-### **Example:**
+#### **Example:**
 ```js
 [
   {'symbol': 'BTC0412PS5100',
@@ -144,28 +144,28 @@ GET /openapi/v1/getOptions
       ]
 ```
 
-## `index`
+### `index`
 获取当前指数价格和EDP（预估交割价格）。这个端点不用发送任何参数。
 
-### **Request Weight:**
+#### **Request Weight:**
 
 0
 
-### **Request URL:**
+#### **Request URL:**
 ```
 GET /quote/v1/option/index
 ```
 
-### **Parameters:**
+#### **Parameters:**
 None
 
-### **Response：**
+#### **Response：**
 名称|类型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `index`|float|`3652.81`|当前指数价格。
 `edp`|float|`3652.81`|预估交割价格（过去10分钟指数价格的平均值）
 
-### **Example:**
+#### **Example:**
 ```js
 {
   'BTCUSDT':{
@@ -176,11 +176,11 @@ None
 }
 ```
 
-## `depth`
+### `depth`
 
 获取当前订单簿的数据。
 
-### **Request Weight:**
+#### **Request Weight:**
 
 根据数量会不一样，请求数量越多，重量越大:
 
@@ -191,12 +191,12 @@ None
 1000|10
 
 
-### **Request Url:**
+#### **Request Url:**
 ```
 GET /openapi/quote/v1/option/depth
 ```
 
-### **Parameters:**
+#### **Parameters:**
 
 名称|类型|是否强制|默认|描述
 ------------ | ------------ | ------------ | ------------ | -----
@@ -204,7 +204,7 @@ GET /openapi/quote/v1/option/depth
 `limit`|integer|`NO`|`100` (max = 100)|返回`bids`和`asks`的数量
 
 
-### **Response:**
+#### **Response:**
 
 名称|类型|例子|描述
 ------------ | ------------ | ------------ | ------------
@@ -219,7 +219,7 @@ GET /openapi/quote/v1/option/depth
 `''`|float|`123.10`|价格
 `''`|float|`300`|当前价格对应的数量
 
-### **Example:**
+#### **Example:**
 
 ```js
 {
@@ -256,25 +256,25 @@ GET /openapi/quote/v1/option/depth
 
 ```
 
-## `trades`
+### `trades`
 
 获取某个期权最近成交订单的信息。
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request URL:**
+#### **Request URL:**
 ```
 GET /openapi/quote/v1/option/trades
 ```
-### **Parameters：**
+#### **Parameters：**
 名称|类型|是否强制|默认|描述
 ------------ | ------------ | ------------ | ------------ | -------
 `symbol`|string|`YES`||期权名称
 `limit`|integer|`NO` (最大值为1000)|`100`|返回成交订单的数量
 
-### **Response:**
+#### **Response:**
 
 名称|类型|例子|描述
 ------------ | ------------ | ------------ | ------------
@@ -283,7 +283,7 @@ GET /openapi/quote/v1/option/trades
 `qty`|float|`5`|数量（张数）
 `isBuyerMaker`|string|`true`|卖方还是买方。`true`=卖方，`false`=买方
 
-### **Example:**
+#### **Example:**
 ```js
 [
   {
@@ -295,20 +295,20 @@ GET /openapi/quote/v1/option/trades
 ]
 ```
 
-## `klines`
+### `klines`
 
 获取某个期权的K线信息（高，低，开，收，交易量...)
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request URL:**
+#### **Request URL:**
 ```
 GET /openapi/quote/v1/option/klines
 ```
 
-### **Parameters：**
+#### **Parameters：**
 名称|类型|是否强制|默认|描述
 ------------ | ------------ | ------------ | ------------ | ------
 `symbol`|string|`YES`||期权名称
@@ -316,7 +316,7 @@ GET /openapi/quote/v1/option/klines
 `limit`|integer|`NO`|`1000`|返回值的数量，最大值为1000
 `to`|integer|`NO`||最后一个数据点的时间戳
 
-### **Response:**
+#### **Response:**
 名称|类型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `''`|long|`1538728740000`|开始时间戳，毫秒（ms）
@@ -332,7 +332,7 @@ GET /openapi/quote/v1/option/klines
 `''`|float|`28.46694368`|买方购买数量（张数）
 
 
-### **Example:**
+#### **Example:**
 ```js
 [
   [
@@ -351,22 +351,22 @@ GET /openapi/quote/v1/option/klines
 ]
 ```
 
-# 私有接口
+## 私有接口
 
-## `order`
+### `order`
 
 下一个做多（buy，即买入）或者做空（sell，即卖出）期权的订单。这个期权端点需要你的签名
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request URL:**
+#### **Request URL:**
 ```bash
 POST /openapi/option/v1/order
 ```
 
-### **Parameters：**
+#### **Parameters：**
 
 名称|类型|是否强制|描述
 ------------ | ------------ | ------------ | ------------
@@ -380,7 +380,7 @@ POST /openapi/option/v1/order
 
 你可以从`brokerInfo`中获取期权价格，数量的配置信息。
 
-### **Response:**
+#### **Response:**
 
 名称|类型|例子|描述
 ------------ | ------------ | ------------ | ------------
@@ -407,7 +407,7 @@ POST /openapi/option/v1/order
 `fee`|float|`0`|实际费用值
 
 
-### **Example:**
+#### **Example:**
 ```js
 {
     'time':1541161088303,
@@ -427,20 +427,20 @@ POST /openapi/option/v1/order
 }
 ```
 
-## `cancel`
+### `cancel`
 
 取消一个订单，用`orderId` 或者 `clientOrderId`来取消。这个API端点需要你的签名。
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 DELETE /openapi/option/v1/order/cancel
 ```
 
-### **Parameter:**
+#### **Parameter:**
 
 名称|类型|是否强制|描述
 ------------ | ------------ | ------------ | ------------
@@ -449,7 +449,7 @@ DELETE /openapi/option/v1/order/cancel
 
 **必须**传送以上两个参数的其中一个。
 
-### **Response:**
+#### **Response:**
 
 名称|类型|例子|描述
 ------------ | ------------ | ------------ | ------------
@@ -475,7 +475,7 @@ DELETE /openapi/option/v1/order/cancel
 `feeToken`|string|`USDT`|手续费计价单位
 `fee`|float|`0`|实际费用值
 
-###  **Example:**
+####  **Example:**
 
 ```js
 {
@@ -496,20 +496,20 @@ DELETE /openapi/option/v1/order/cancel
 }
 ```
 
-### `openOrders`
+#### `openOrders`
 
 获取你当前未成交的订单。这个API端点需要你的签名。
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/option/v1/openOrders
 ```
 
-### **Parameters:**
+#### **Parameters:**
 名称|类型|是否强制|默认|描述
 ------------ | ------------ | ------------ | ------------ | --------
 `symbol`|string|`NO`||期权名称，如果没有发送默认返回所有期权订单。
@@ -520,7 +520,7 @@ GET /openapi/option/v1/openOrders
 
 如果发送了`orderId`，将会返回小于`orderId`的所有订单。若没有，将会返回最新的订单。
 
-### **Response:**
+#### **Response:**
 
 名称|类型|例子|描述
 ------------ | ------------ | ------------ | ------------
@@ -546,7 +546,7 @@ GET /openapi/option/v1/openOrders
 `feeToken`|string|`USDT`|手续费计价单位
 `fee`|float|`0`|实际费用值
 
-### **Example:**
+#### **Example:**
 
 ```js
 [
@@ -570,26 +570,26 @@ GET /openapi/option/v1/openOrders
 ]
 ```
 
-## `positions`
+### `positions`
 
 获取当前仓位信息。这个API端点需要你的签名。
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/option/v1/positions
 ```
 
-### **Parameters:**
+#### **Parameters:**
 
 名称|类型|是否强制|描述
 ------------ | ------------ | ------------ | ------------
 `symbol`|string|`NO`|期权名称，如果没有发送默认返回所有期权的仓位。
 
-### **Response:**
+#### **Response:**
 对于每个`symbol`（期权名称），这个端点将会返回以下信息。
 
 名称|类型|例子|描述
@@ -606,7 +606,7 @@ GET /openapi/option/v1/positions
 `changedRate`|float|`1.02`|持仓盈亏百分比。**做多：** 持仓盈亏/ （持仓均价 \* 持仓量） **做空：** 持仓盈亏/（保证金 - 持仓均价 \* 持仓量）
 `index`|float|`5012.28666667`|当前标的资产指数值
 
-### **Example:**
+#### **Example:**
 
 ```js
 [
@@ -626,20 +626,20 @@ GET /openapi/option/v1/positions
 ]
 ```
 
-## `historyOrders`
+### `historyOrders`
 
 获取历史订单信息（部分成交的、全部成交的、取消的）。这个API端点需要你的签名。
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/option/v1/historyOrders
 ```
 
-### **Parameters:**
+#### **Parameters:**
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | ---------
 `symbol`|string|`NO`||期权名称，如果没有发送将默认返回所有期权的订单。
@@ -648,7 +648,7 @@ Parameter|type|required|default|description
 `orderStatus`|string|`NO`||订单状态。可能出现的值为：`NEW`(新订单，无成交)、`PARTIALLY_FILLED`（部分成交）、`FILLED`（全部成交）、`CANCELED`（已取消）和`REJECTED`（订单被拒绝）.
 `limit`|integer|`NO`|`20`|返回值的数量
 
-### **Response:**
+#### **Response:**
 
 名称|类型|例子|描述
 ------------ | ------------ | ------------ | ------------
@@ -674,7 +674,7 @@ Parameter|type|required|default|description
 `feeToken`|string|`USDT`|手续费计价单位
 `fee`|float|`0`|实际费用值
 
-### **Example:**
+#### **Example:**
 ```js
 {
   [
@@ -698,20 +698,20 @@ Parameter|type|required|default|description
 }
 ```
 
-## `getOrder`
+### `getOrder`
 
 获取某个订单的详细信息
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/option/v1/getOrder
 ```
 
-### **Parameters:**
+#### **Parameters:**
 名称|类型|是否强制|默认|描述
 ------------ | ------------ | ------------ | ------------ | --------
 `orderId`|integer|`NO`||订单ID
@@ -720,7 +720,7 @@ GET /openapi/option/v1/getOrder
 **注意：**` orderId` 或者 `clientOrderId` **必须发送其中之一**
 
 
-### **Response:**
+#### **Response:**
 名称|类型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `time`|long|`1551062936784`|订单创建时的时间戳，毫秒（ms）
@@ -745,7 +745,7 @@ GET /openapi/option/v1/getOrder
 `feeToken`|string|`USDT`|手续费计价单位
 `fee`|float|`0`|实际费用值
 
-### **Example:**
+#### **Example:**
 
 ```js
 {
@@ -766,20 +766,20 @@ GET /openapi/option/v1/getOrder
 }
 ```
 
-## `myTrades`
+### `myTrades`
 
 获取当前账户的成交订单记录。这个API端点需要你的签名。
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/option/v1/myTrades
 ```
 
-### **Parameters:**
+#### **Parameters:**
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | --------
 `symbol`|string|`NO`|| 期权名称，如果没有发送将默认返回所有期权的订单。
@@ -788,7 +788,7 @@ Parameter|type|required|default|description
 `fromId`|integer|`NO`||大于这个值的tradeId的订单
 `toId`|integer|`NO`||小于这个值的tradeId的订单
 
-### **Response:**
+#### **Response:**
 
 名称|类型|例子|描述
 ------------ | ------------ | ------------ | ------------
@@ -804,7 +804,7 @@ Parameter|type|required|default|description
 `type`|string|`LIMIT`|订单类型。可能出现的值只能为:`LIMIT`(限价)和`MARKET`（市价）
 `symbol`|string|`BTC0412PS3900`|期权名称
 
-### **Example:**
+#### **Example:**
 ```js
 [
   {
@@ -823,22 +823,22 @@ Parameter|type|required|default|description
 ]
 ```
 
-## `settlements`
+### `settlements`
 
 获取你账户里交割期权的信息。这个API端点需要你的签名。
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET  /openapi/option/v1/settlements
 ```
-### **Parameters:**
+#### **Parameters:**
 None
 
-### **Responses:**
+#### **Responses:**
 
 名称|类型|例子|描述
 ------------ | ------------ | ------------ | ------------
@@ -854,7 +854,7 @@ None
 `changed`|float|`20.3`|交割收益
 `changedRate`|float|`2.34`|交割收益百分比。 **做多：** 做多交割收益/ (持仓均价 \* 持仓量) **做空：**做空交割收益/（保证金-持仓均价 \* 持仓量）
 
-### **Examples:**
+#### **Examples:**
 ```js
 [
   {'symbol': 'BTC0405PS3850',
@@ -871,22 +871,22 @@ None
   ]       
 ```
 
-## `account`
+### `account`
 
 获取当前账户余额信息。这个API端点需要你的签名。
 
-### **Request Weight:**
+#### **Request Weight:**
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET  /openapi/option/v1/account
 ```
 
-### **Parameters:**
+#### **Parameters:**
 None
 
-### **Response:**
+#### **Response:**
 名称|类型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `totalAsset`|float|`1000.0`|期权账户中的全部资产估值（以USDT计算）
@@ -902,7 +902,7 @@ None
 `locked`|float|`100.0`|冻结额（未成交订单冻结）
 `margin`|float|`100.0`|保证金 （做空期权抵押）
 
-### **Examples:**
+#### **Examples:**
 ```js
 {
   'totalAsset': '8533.0606762',

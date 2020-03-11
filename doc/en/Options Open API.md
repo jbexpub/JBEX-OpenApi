@@ -2,26 +2,26 @@
 
 The base url of broker open API can be found [here](endpoint.md)
 
-# Public API 
+## Public API 
 
-## `brokerInfo`
+### `brokerInfo`
 
 Current broker trading rules and symbol information.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 0
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/v1/brokerInfo
 ```
 
-### **Parameters:**
+#### **Parameters:**
 
 None
 
-### **Response:**
+#### **Response:**
 name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `timezone`|string|`UTC`|Timezone of timestamp
@@ -55,7 +55,7 @@ name|type|example|description
 `stepSize`|float|`0.001`|Precision of the option quantity
 `minNotional`|float|`1`|Precision of the option order size (quantity * price)
 
-### **Example:**
+#### **Example:**
 ```js
 {
   'timezone': 'UTC',
@@ -95,25 +95,25 @@ name|type|example|description
       }      
 ```
 
-## `getOptions`
+### `getOptions`
 
 Retrieves available trading and expired options. Expired options will be returned if `expired` is set `true`.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request URL:**
+#### **Request URL:**
 ```
 GET /openapi/v1/getOptions
 ```
 
-### **Parameters：**
+#### **Parameters：**
 name|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | ----
 `expired`|string|`NO`|`false`|Set to `true` to show expired options instead of active ones. This can be useful for retrieving historic data.
 
-### **Response:**
+#### **Response:**
 
 name|type|example|description
 ------------ | ------------ | ------------ | ------------
@@ -128,7 +128,7 @@ name|type|example|description
 
 
 
-### **Example:**
+#### **Example:**
 ```js
 [
   {'symbol': 'BTC0412PS5100',
@@ -143,28 +143,28 @@ name|type|example|description
       ]
 ```
 
-## `index`
+### `index`
 Retrieves the current index price and EDP. This API endpoint does not take any Parameters.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 0
 
-### **Request URL:**
+#### **Request URL:**
 ```
 GET /openapi/quote/v1/option/index
 ```
 
-### **Parameters:**
+#### **Parameters:**
 None
 
-### **Response：**
+#### **Response：**
 name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `index`|float|`3652.81`|The currency index price.
 `edp`|float|`3652.81`|Estimated delivery price (Average index price in the last 10 minutes).
 
-### **Example:**
+#### **Example:**
 ```js
 {
   'BTCUSDT':{
@@ -175,12 +175,12 @@ name|type|example|description
 }
 ```
 
-## `depth`
+### `depth`
 
 Retrieves the options order book.
 
 
-### **Request Weight:**
+#### **Request Weight:**
 
 Adjusted based on the limit:
 
@@ -191,18 +191,18 @@ Limit|Weight
 1000|10
 
 
-### **Request Url:**
+#### **Request Url:**
 ```
 GET /openapi/quote/v1/option/depth
 ```
 
-### **Parameters:**
+#### **Parameters:**
 parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | -----
 `symbol`|string|`YES`||The option name for which to retrieve the order book, use `getOptions` to get option names.
 `limit`|integer|`NO`|`100` (max = 100)|The number of entries to return for bids and asks.
 
-### **Response:**
+#### **Response:**
 name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `time`|long|`1550829103981`|Current timestamp (ms)
@@ -216,7 +216,7 @@ name|type|example|description
 `''`|float|`123.10`|price level
 `''`|float|`300`|The total quantity of orders for this price level
 
-### **Example:**
+#### **Example:**
 
 ```js
 {
@@ -253,25 +253,25 @@ name|type|example|description
 
 ```
 
-## `trades`
+### `trades`
 
 Retrieve the latest trades that have occurred for a specific option.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request URL:**
+#### **Request URL:**
 ```
 GET /openapi/quote/v1/option/trades
 ```
-### **Parameters：**
+#### **Parameters：**
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | ------
 `symbol`|string|`YES`||The name of the option.
 `limit`|integer|`NO` (clamped to max 1000)|`100`|The number of trades returned
 
-### **Response:**
+#### **Response:**
 
 name|type|example|description
 ------------ | ------------ | ------------ | ------------
@@ -281,7 +281,7 @@ name|type|example|description
 `isBuyerMaker`|string|`true`|Maker or taker of the trade. `true`= maker, `false` = taker
 
 
-### **Example:**
+#### **Example:**
 ```js
 [
   {
@@ -293,20 +293,20 @@ name|type|example|description
 ]
 ```
 
-## `klines`
+### `klines`
 
 Retrieves the kline information (open, high, trade volume, etc.) for a specific option.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request URL:**
+#### **Request URL:**
 ```
 GET /openapi/quote/v1/option/klines
 ```
 
-### **Parameters：**
+#### **Parameters：**
 | Parameter|type|required|default|description |
 | ------------ | ------------ | ------------ | ------------ | ---- |
 |`symbol`|string|`YES`||Name of the option.|
@@ -314,7 +314,7 @@ GET /openapi/quote/v1/option/klines
 |`limit`|integer|`NO`|`1000`|Number of entries returned. Max is capped at 1000.|
 |`to`|integer|`NO`||timestamp of the last datapoint|
 
-### **Response:**
+#### **Response:**
 name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `''`|long|`1538728740000`|Open Time
@@ -330,7 +330,7 @@ name|type|example|description
 `''`|float|`28.46694368`|Taker buy quote asset volume
 
 
-### **Example:**
+#### **Example:**
 ```js
 [
   [
@@ -352,22 +352,22 @@ name|type|example|description
 
 `quote asset` refers to the asset that is the price of a symbol.
 
-# Private API
+## Private API
 
-## `order`
+### `order`
 
 Places a buy order for an option. This API endpoint requires your request to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request URL:**
+#### **Request URL:**
 ```bash
 POST /openapi/openapi/option/order
 ```
 
-### **Parameters：**
+#### **Parameters：**
 Parameter|type|required|example|description
 ------------ | ------------ | ------------ | ------------ | ------------
 `symbol`|string|`YES`|`BTC0412PS3900`|Name of option
@@ -380,7 +380,7 @@ Parameter|type|required|example|description
 
 You can get options' price, quantity configuration data in the `brokerInfo` endpoint.
 
-### **Response:**
+#### **Response:**
 Name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `time`|long|`1551062936784`|Timestamp when the order is created.
@@ -406,7 +406,7 @@ Name|type|example|description
 `fee`|float|`0`|Actual transaction fees occurred.
 
 
-### **Example:**
+#### **Example:**
 ```js
 {
     'time':1541161088303,
@@ -426,20 +426,20 @@ Name|type|example|description
 }
 ```
 
-## `cancel`
+### `cancel`
 
 Cancels an order, specified by `orderId` or `clientOrderId`. This API endpoint requires your request to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 DELETE /openapi/option/v1/order/cancel
 ```
 
-### **Parameter:**
+#### **Parameter:**
 
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | -----
@@ -448,7 +448,7 @@ Parameter|type|required|default|description
 
 One **MUST** be provided of these two parameters.
 
-### **Response:**
+#### **Response:**
 
 Name|type|example|description
 ------------ | ------------ | ------------ | ------------
@@ -474,7 +474,7 @@ Name|type|example|description
 `feeToken`|string|`USDT`|Fee token kind.
 `fee`|float|`0`|Actual transaction fees occurred.
 
-###  **Example:**
+####  **Example:**
 
 ```js
 {
@@ -495,20 +495,20 @@ Name|type|example|description
 }
 ```
 
-### `openOrders`
+#### `openOrders`
 
 Retrieves open orders. This API endpoint requires your request to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/option/v1/openOrders
 ```
 
-### **Parameters:**
+#### **Parameters:**
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | --------
 `symbol`|string|`NO`||Symbol to return open orders for. If not sent, orders of all options will be returned.
@@ -519,7 +519,7 @@ Parameter|type|required|default|description
 
 If `orderId` is set, it will get orders < that `orderId`. Otherwise most recent orders are returned.
 
-### **Response:**
+#### **Response:**
 
 Name|type|example|description
 ------------ | ------------ | ------------ | ------------
@@ -545,7 +545,7 @@ Name|type|example|description
 `feeToken`|string|`USDT`|Fee token kind.
 `fee`|float|`0`|Actual transaction fees occurred.
 
-### **Example:**
+#### **Example:**
 
 ```js
 [
@@ -569,25 +569,25 @@ Name|type|example|description
 ]
 ```
 
-## `positions`
+### `positions`
 
 Retrieves current positions. This API endpoint requires your request to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/option/v1/positions
 ```
 
-### **Parameters:**
+#### **Parameters:**
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | --------
 `symbol`|string|`NO`||Name of the option. If not sent, positions for all options will be returned.
 
-### **Response:**
+#### **Response:**
 For each unique `symbol`, this endpoint will return the following information.
 
 name|type|example|description
@@ -604,7 +604,7 @@ name|type|example|description
 `changedRate`|float|`1.02`|**Long Position:** `changed`/`averagePrice` **Short Position:** (`changed` \* `position`) / (`margin` - `averagePrice` \* `position`)
 `index`|float|`5012.28666667`|Current index price of the underlying asset.
 
-### **Example:**
+#### **Example:**
 
 ```js
 [
@@ -624,20 +624,20 @@ name|type|example|description
 ]
 ```
 
-## `historyOrders`
+### `historyOrders`
 
 Retrieves history of orders that have been partially or fully filled or canceled. This API endpoint requires your request to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/option/v1/historyOrders
 ```
 
-### **Parameters:**
+#### **Parameters:**
 Parameter|type|required|efault|description
 ------------ | ------------ | ------------ | ------------ | --------
 `symbol`|string|`NO`||Name of the option. If not sent, orders of all options will be returned.
@@ -646,7 +646,7 @@ Parameter|type|required|efault|description
 `orderStatus`|string||Status of the order. Possible values include `PARTIALLY_FILLED`, `FILLED`, and `CANCELED`.
 `limit`|integer|`20`|Number of items to be returned
 
-### **Response:**
+#### **Response:**
 
 Name|type|example|description
 ------------ | ------------ | ------------ | ------------
@@ -672,7 +672,7 @@ Name|type|example|description
 `feeToken`|string|`USDT`|Fee token kind.
 `fee`|float|`0`|Actual transaction fees occurred.
 
-### **Example:**
+#### **Example:**
 ```js
 {
   [
@@ -696,25 +696,25 @@ Name|type|example|description
 }
 ```
 
-## `getOrder`
+### `getOrder`
 Get details on a specific order, regardless of order state.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/option/v1/getOrder
 ```
 
-### **Parameters:**
+#### **Parameters:**
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | -------
 `orderId`|integer|`NO`|| Order ID. **Either `orderId` or `clientOrderId` must be sent**
 `clientOrderId`|string|`NO`||Unique client customized ID of the order. **Either `orderId` or `clientOrderId` must be sent**
 
-### **Response:**
+#### **Response:**
 
 Name|type|example|description
 ------------ | ------------ | ------------ | ------------
@@ -740,7 +740,7 @@ Name|type|example|description
 `feeToken`|string|`USDT`|Fee token kind.
 `fee`|float|`0`|Actual transaction fees occurred.
 
-### **Example:**
+#### **Example:**
 
 ```js
 {
@@ -761,19 +761,19 @@ Name|type|example|description
 }
 ```
 
-## `myTrades`
+### `myTrades`
 Retrieve the trade history of the account. This API endpoint requires your request to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/option/v1/myTrades
 ```
 
-### **Parameters:**
+#### **Parameters:**
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | -------
 `symbol`|string|`NO`|| Name of the option. If not sent, trades for all symbols will be returned.
@@ -782,7 +782,7 @@ Parameter|type|required|default|description
 `fromId`|integer|`NO`||TradeId to fetch from.
 `toId`|integer|`NO`||TradeId to fetch to.
 
-### **Response:**
+#### **Response:**
 
 Name|type|example|description
 ------------ | ------------ | ------------ | ------------
@@ -798,7 +798,7 @@ Name|type|example|description
 `type`|string|`LIMIT`|The order type, possible types: `LIMIT`, `MARKET`
 `symbol`|string|`BTC0412PS3900`|	The name of the option
 
-### **Example:**
+#### **Example:**
 ```js
 [
   {
@@ -817,23 +817,23 @@ Name|type|example|description
 ]
 ```
 
-## `settlements`
+### `settlements`
 
 Retrieves settlement events that have affected your account. This API endpoint requires your request to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET  /openapi/option/v1/settlements
 ```
-### **Parameters:**
+#### **Parameters:**
 
 None
 
-### **Responses:**
+#### **Responses:**
 
 Name|type|example|description
 ------------ | ------------ | ------------ | ------------
@@ -849,7 +849,7 @@ Name|type|example|description
 `changed`|float|`20.3`|Settlement payoff of the option
 `changedRate`|float|`2.34`|**Long Position**: `changed`/(averagePrice \* position). **Short Position**: `changed`/(`margin` - averagePrice \* position)
 
-### **Examples:**
+#### **Examples:**
 ```js
 [
   {'symbol': 'BTC0405PS3850',
@@ -866,23 +866,23 @@ Name|type|example|description
   ]       
 ```
 
-## `account`
+### `account`
 
 This endpoint is used to retrieve options account balance. This endpoint requires
 you to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET  /openapi/option/v1/account
 ```
 
-### **Parameters:**
+#### **Parameters:**
 None
 
-### **Response:**
+#### **Response:**
 Name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `totalAsset`|float|`1000.0`|Total asset value in option account quoted in USDT.
@@ -898,7 +898,7 @@ Name|type|example|description
 `locked`|float|`100.0`|Amount locked (for open orders)
 `margin`|float|`100.0`|Amount used for margin (for short positions)
 
-### **Examples:**
+#### **Examples:**
 ```js
 {
   'totalAsset': '8533.0606762',

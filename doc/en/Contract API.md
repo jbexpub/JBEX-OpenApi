@@ -1,29 +1,29 @@
 # Contract
 
-The base url of broker open API can be found [here](doc/endpoint.md)
+The base url of broker open API can be found [here](endpoint.md)
 
-# Public API
+## Public API
 
-## `brokerInfo`
+### `brokerInfo`
 
 Current broker trading rules and symbol information.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 0
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/v1/brokerInfo
 ```
 
-### **Parameters：**
+#### **Parameters：**
 
 name|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | ----
 `type`|string|`NO`|| Trading section information. Possible values include `token`, `options`, and `contracts`. If the parameter is not sent, all trading information will be returned.
 
-### **Response:**
+#### **Response:**
 name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `timezone`|string|`UTC`|Timezone of timestamp
@@ -76,7 +76,7 @@ name|type|example|description
 `initialMargin`|float|`0.1`|Initial margin rate requirement.
 `maintMargin`|float|`0.03`|Minimum maintenance margin rate requirement.
 
-### **Example:**
+#### **Example:**
 ```js
 {
   "timezone":"UTC",
@@ -158,18 +158,18 @@ name|type|example|description
 }
 ```
 
-## `insurance` **(PENDING)**
+### `insurance` **(PENDING)**
 Get current insurance funding.
 
-### **Request Weight:**
+#### **Request Weight:**
 0
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/contract/v1/insurance
 ```
 
-### **Parameters：**
+#### **Parameters：**
 name|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | ------------
 `symbol`|string|`NO`||Input specific symbol to return the corresponding records. If not entered, records for all symbols will be returned.
@@ -177,7 +177,7 @@ name|type|required|default|description
 `toId`|long|`NO`||pagination, return record which id > toId. If toId is given, toId cannot be 0.
 `limit`|integer|`NO`|20|Number of entries returned.
 
-### **Response:**
+#### **Response:**
 name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `id`|long|`1552272184833`|The ID of the record.
@@ -199,30 +199,30 @@ name|type|example|description
 ```
 
 
-## `index`
+### `index`
 
 Underlying asset index price.
 
-### **Request Weight:**
+#### **Request Weight:**
 0
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/quote/v1/contract/index
 ```
-### **Parameters：**
+#### **Parameters：**
 name|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | ----
 symbol|string|`NO`||Underlying index symbol. If this parameter is not sent, all symbols
 will be returned.
 
-### **Response:**
+#### **Response:**
 name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `index`|float|`8342.73`|The index price of the instrument.
 `EDP`|float|`8432.32`|The EDP (estimated delivery price of the contract). The average price of the index in the last 1o minutes. This will be the price on which the contract is going to be settled.
 
-### **Example:**
+#### **Example:**
 ```js
 {
   "index":{
@@ -240,19 +240,19 @@ name|type|example|description
 }
 ```
 
-## `fundingRate`
+### `fundingRate`
 
 Get current funding rate (*historical in process*)
 
-### **Request Weight:**
+#### **Request Weight:**
 0
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/contract/v1/fundingRate
 ```
 
-### **Parameters：**
+#### **Parameters：**
 name|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | ----
 `symbol`|string|`NO`||The contract to be returned. If not sent, records for all symbols will be returned as a result.
@@ -261,7 +261,7 @@ name|type|required|default|description
 `to`|long|`NO`||Timestamp to end.
 `limit`|integer|`NO`|`20`| Number of entries returned.
 
-### **Response:**
+#### **Response:**
 name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `symbol`|string|`BTCUSD`|Name of the contracts
@@ -270,7 +270,7 @@ name|type|example|description
 `rate`|float|`0.00321`|The funding rate of this interval.
 `index`|float|`10076.34`|Index price at the time of settlement.
 
-### **Example:**
+#### **Example:**
 
 ```js
 [
@@ -283,12 +283,12 @@ name|type|example|description
 ]
 ```
 
-## `depth`
+### `depth`
 
 Retrieves the contracts order book.
 
 
-### **Request Weight:**
+#### **Request Weight:**
 
 Adjusted based on the limit:
 
@@ -299,18 +299,18 @@ Limit|Weight
 1000|10
 
 
-### **Request Url:**
+#### **Request Url:**
 ```
 GET /openapi/quote/v1/contract/depth
 ```
 
-### **Parameters:**
+#### **Parameters:**
 parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | -----
 `symbol`|string|`YES`||The contract name for which to retrieve the order book
 `limit`|integer|`NO`|`100` (max = 100)|The number of entries to return for bids and asks.
 
-### **Response:**
+#### **Response:**
 name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `time`|long|`1550829103981`|Current timestamp (ms)
@@ -324,7 +324,7 @@ name|type|example|description
 `''`|float|`123.10`|price level
 `''`|float|`300`|The total quantity of orders for this price level
 
-### **Example:**
+#### **Example:**
 
 ```js
 {
@@ -361,25 +361,25 @@ name|type|example|description
 
 ```
 
-## `trades`
+### `trades`
 
 Retrieve the latest trades that have occurred for a specific contract.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request URL:**
+#### **Request URL:**
 ```
 GET /openapi/quote/v1/contract/trades
 ```
-### **Parameters：**
+#### **Parameters：**
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | ------
 `symbol`|string|`YES`||The name of the contract.
 `limit`|integer|`NO` (clamped to max 1000)|`100`|The number of trades returned
 
-### **Response:**
+#### **Response:**
 
 name|type|example|description
 ------------ | ------------ | ------------ | ------------
@@ -389,7 +389,7 @@ name|type|example|description
 `isBuyerMaker`|string|`true`|Maker or taker of the trade. `true`= maker, `false` = taker
 
 
-### **Example:**
+#### **Example:**
 ```js
 [
   {
@@ -401,20 +401,20 @@ name|type|example|description
 ]
 ```
 
-## `klines`
+### `klines`
 
 Retrieves the kline information (open, high, trade volume, etc.) for a specific contract.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request URL:**
+#### **Request URL:**
 ```
 GET /openapi/quote/v1/contract/klines
 ```
 
-### **Parameters：**
+#### **Parameters：**
 | Parameter|type|required|default|description |
 | ------------ | ------------ | ------------ | ------------ | ---- |
 |`symbol`|string|`YES`||Name of the contract.|
@@ -422,7 +422,7 @@ GET /openapi/quote/v1/contract/klines
 |`limit`|integer|`NO`|`1000`|Number of entries returned. Max is capped at 1000.|
 |`to`|integer|`NO`||timestamp of the last datapoint|
 
-### **Response:**
+#### **Response:**
 name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `''`|long|`1538728740000`|Open Time
@@ -438,7 +438,7 @@ name|type|example|description
 `''`|float|`28.46694368`|Taker buy quote asset volume
 
 
-### **Example:**
+#### **Example:**
 ```js
 [
   [
@@ -460,22 +460,22 @@ name|type|example|description
 
 `quote asset` means the amount of tokens paid to acquire the contracts.
 
-# Private API 
+## Private API 
 
-## `order`
+### `order`
 
 Places order for a contract. This API endpoint requires your request to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request URL:**
+#### **Request URL:**
 ```bash
 POST /openapi/contract/v1/order
 ```
 
-### **Parameters：**
+#### **Parameters：**
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | ------------
 `symbol`|string|`YES`||Name of the contract.
@@ -497,7 +497,7 @@ Note: if your balance does not meet the margin requirement (which is the minimum
 
 For detailed information regarding various *price types* and *order types*. Please refer to the explanation section in the end.
 
-### **Response:**
+#### **Response:**
 Name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `time`|long|`1570759718825`|Timestamp when the order is created.
@@ -518,7 +518,7 @@ Name|type|example|description
 `timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`, and `LIMIT_MAKER`
 `fees`|||Fees incurred for this order.
 
-### **Example:**
+#### **Example:**
 ```js
 {
   'time': '1570759718825',
@@ -541,20 +541,20 @@ Name|type|example|description
 }
 ```
 
-## `cancel`
+### `cancel`
 
 Cancels an order, specified by `orderId` or `clientOrderId`. This API endpoint requires your request to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 DELETE /openapi/contract/v1/order/cancel
 ```
 
-### **Parameter:**
+#### **Parameter:**
 
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | -----
@@ -564,7 +564,7 @@ Parameter|type|required|default|description
 
 One **MUST** be provided for either of these two parameters.
 
-### **Response:**
+#### **Response:**
 
 Name|type|example|description
 ------------ | ------------ | ------------ | ------------
@@ -593,7 +593,7 @@ Name|type|example|description
 `feeToken`|string|`USDT`|Fee token kind.
 `fee`|float|`0`|Actual transaction fees occurred.
 
-###  **Example:**
+####  **Example:**
 
 ```js
 {
@@ -617,32 +617,32 @@ Name|type|example|description
 }
 ```
 
-### `batchCancel`
+#### `batchCancel`
 
 Cancel orders en masse. (**PENDING: batch cancel for STOP orders**)
 
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 DELETE /openapi/contract/v1/order/batchCancel
 ```
-### **Parameter:**
+#### **Parameter:**
 
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | -----
 `symbol`|string/list|`NO`||The symbol ids of the cancel orders
 
-### **Response:**
+#### **Response:**
 Name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `message`|string|`success`|The message response of the cancel request.
 `timestamp`|long|`1541161088303`|The timestamp when the response is returned.
 
-###  **Example:**
+####  **Example:**
 
 ```js
 {
@@ -652,20 +652,20 @@ Name|type|example|description
 ```
 
 
-### `openOrders`
+#### `openOrders`
 
 Retrieves open orders. This API endpoint requires your request to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/contract/v1/openOrders
 ```
 
-### **Parameters:**
+#### **Parameters:**
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | --------
 `symbol`|string|`NO`||Symbol to return open orders for. If not sent, orders of all contracts will be returned.
@@ -676,7 +676,7 @@ Parameter|type|required|default|description
 
 If `orderId` is set, it will get orders < that `orderId`. Otherwise most recent orders are returned.
 
-### **Response:**
+#### **Response:**
 Name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `time`|long|`1551062936784`|Timestamp when the order is created.
@@ -697,7 +697,7 @@ Name|type|example|description
 `timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`, and `LIMIT_MAKER`.
 `fees`|||Fees incurred for this order.
 
-### **Example:**
+#### **Example:**
 
 ```js
 [
@@ -723,20 +723,20 @@ Name|type|example|description
 ]
 ```
 
-## `historyOrders`
+### `historyOrders`
 
 Retrieves history of orders that have been partially or fully filled or canceled. This API endpoint requires your request to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/contract/v1/historyOrders
 ```
 
-### **Parameters:**
+#### **Parameters:**
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | --------
 `symbol`|string|`NO`||Symbol to return open orders for. If not sent, orders of all contracts will be returned.
@@ -747,7 +747,7 @@ Parameter|type|required|default|description
 
 If `orderId` is set, it will get orders < that `orderId`. Otherwise most recent orders are returned.
 
-### **Response:**
+#### **Response:**
 Name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `time`|long|`1551062936784`|Timestamp when the order is created.
@@ -768,7 +768,7 @@ Name|type|example|description
 `timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`, and `LIMIT_MAKER`.
 `fees`|||Fees incurred for this order.
 
-### **Example:**
+#### **Example:**
 
 ```js
 [
@@ -794,19 +794,19 @@ Name|type|example|description
 ]
 ```
 
-## `getOrder`
+### `getOrder`
 Get details on a specific order, regardless of order state.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/contract/v1/getOrder
 ```
 
-### **Parameters:**
+#### **Parameters:**
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | -------
 `orderId`|integer|`NO`|| Order ID.
@@ -815,7 +815,7 @@ Parameter|type|required|default|description
 
 **Either `orderId` or `clientOrderId` must be sent**
 
-### **Response:**
+#### **Response:**
 Name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `time`|long|`1551062936784`|Timestamp when the order is created.
@@ -836,7 +836,7 @@ Name|type|example|description
 `timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`, and `LIMIT_MAKER`.
 `fees`|||Fees incurred for this order.
 
-### **Example:**
+#### **Example:**
 
 ```js
 {
@@ -860,19 +860,19 @@ Name|type|example|description
 }
 ```
 
-## `myTrades`
+### `myTrades`
 Retrieve the trade history of the account. This API endpoint requires your request to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/contract/v1/myTrades
 ```
 
-### **Parameters:**
+#### **Parameters:**
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | -------
 `symbol`|string|`NO`|| Name of the contract. If not sent, trades for all symbols will be returned.
@@ -881,7 +881,7 @@ Parameter|type|required|default|description
 `fromId`|integer|`NO`||TradeId to fetch from.
 `toId`|integer|`NO`||TradeId to fetch to.
 
-### **Response:**
+#### **Response:**
 Name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `time`|long|`1551062936784`|Timestamp when the order is created.
@@ -897,7 +897,7 @@ Name|type|example|description
 `orderType`|string|`LIMIT`|The order type, possible types: LIMIT, MARKET
 
 
-### **Example:**
+#### **Example:**
 
 ```js
 [
@@ -918,26 +918,26 @@ Name|type|example|description
 ]
 ```
 
-## `positions`
+### `positions`
 
 Retrieves current positions. This API endpoint requires your request to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/contract/v1/positions
 ```
 
-### **Parameters:**
+#### **Parameters:**
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | --------
 `symbol`|string|`NO`||Name of the contract. If not sent, positions for all contracts will be returned.
 `side`|string|`NO`||`LONG` or `SHORT`. Direction of the position. If not sent, positions for both sides will be returned.
 
-### **Response:**
+#### **Response:**
 Name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `symbol`|string|`BTC-PERP-REV`|Name of the contract.
@@ -956,7 +956,7 @@ Name|type|example|description
 `realizedPnL`|float|`6.8`|Cumulative realized profit and loss for this `symbol`.
 
 
-### **Example:**
+#### **Example:**
 ```js
 [
   {
@@ -978,23 +978,23 @@ Name|type|example|description
 ]
 ```
 
-## `account`
+### `account`
 
 This endpoint is used to retrieve contract account balance. This endpoint requires
 you to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET  /openapi/contract/v1/account
 ```
 
-### **Parameters:**
+#### **Parameters:**
 None
 
-### **Response:**
+#### **Response:**
 Name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `total`|float|`131.06671401`|Total balance.
@@ -1002,7 +1002,7 @@ Name|type|example|description
 `positionMargin`|float|`0.01215991`|Margin for positions.
 `orderMargin`|float|`0`| Margin locked for open orders.
 
-### **Example:**
+#### **Example:**
 
 ```js
 {
@@ -1015,19 +1015,19 @@ Name|type|example|description
 }
 ```
 
-## `modifyMargin`
+### `modifyMargin`
 
 Modify margin for a specific symbol. This endpoint requires your position to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 POST  /openapi/contract/v1/modifyMargin
 ```
 
-### **Parameters:**
+#### **Parameters:**
 
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | -------
@@ -1035,7 +1035,7 @@ Parameter|type|required|default|description
 `side`|string|`YES`||LONG or SHORT. Direction of the position.
 `amount`|float|`YES`||Amount of margin to be added (Positive Value) or removed (Negative Value). Please note that this amount refers to the underlying quote asset of the asset.
 
-### **Response:**
+#### **Response:**
 
 Name|type|example|description
 ------------ | ------------ | ------------ | ------------
@@ -1043,7 +1043,7 @@ Name|type|example|description
 `margin`|float|`12.3`|Updated margin for the symbol.
 `timestamp`|long|`1541161088303`|Updated timestamp
 
-### **Example:**
+#### **Example:**
 ```js
 {
   'symbol':'BTC-PERP-REV',
@@ -1052,20 +1052,20 @@ Name|type|example|description
 }
 ```
 
-## `transfer` **(PENDING)**
+### `transfer` **(PENDING)**
 
 This endpoint is used to transfer funds across different accounts. This endpoint requires
 you to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 POST  /openapi/v1/transfer
 ```
 
-### **Parameters:**
+#### **Parameters:**
 
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | -------
@@ -1076,11 +1076,11 @@ Parameter|type|required|default|description
 
 Currently supports transferring assets across `wallet`, `option`, and `contract` accounts.
 
-### **Response:**
+#### **Response:**
 
 A confirmation message will be returned.
 
-### **Example:**
+#### **Example:**
 
 ```js
 {
@@ -1089,9 +1089,9 @@ A confirmation message will be returned.
 }
 ```
 
-## Key parameter explanation:
+### Key parameter explanation:
 
-### `side`
+#### `side`
 
 The side of the trade.
 
@@ -1103,7 +1103,7 @@ The side of the trade.
 
 `BUY_CLOSE`: close a short position.
 
-### `priceType`
+#### `priceType`
 
 Price types.
 
@@ -1125,7 +1125,7 @@ For example, if you are opening 10 contracts long, the best buy price is 10 and 
 
 For example, if you are opening 10 contracts long, the latest price is 10. Then you will be sending out an order buying 10 contracts at (10 * 1.05)=10.5.
 
-### `timeInForce`
+#### `timeInForce`
 
 Time in force.
 
@@ -1137,7 +1137,7 @@ Time in force.
 
 `LIMIT_MAKER`: Order will be cancelled if executed immediately.
 
-### `orderType`
+#### `orderType`
 
 Order type.
 

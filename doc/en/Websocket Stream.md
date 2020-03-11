@@ -51,7 +51,7 @@ The  client need to send a `PING` message to the server regularly through the We
 }
 ```
 
-### Trade Streams
+## Trade Streams
 
 The Trade Streams push raw trade information; each trade has a unique buyer and seller.
 
@@ -95,7 +95,7 @@ Variable "v" acts as an tradeId. This variable is shared across different symbol
 }
 ```
 
-### Market Tickers Stream
+## Market Tickers Stream
 
 24hr Ticker statistics for a symbol that changed in an array.
 
@@ -133,7 +133,7 @@ Variable "v" acts as an tradeId. This variable is shared across different symbol
 ```
 
 
-### Kline/Candlestick Streams
+## Kline/Candlestick Streams
 
 The Kline/Candlestick Stream push updates to the current klines/candlestick every second.
 
@@ -187,7 +187,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 }
 ```
 
-### Orderbook Depth Stream
+## Orderbook Depth Stream
 
 The Depth Streams for symbols.
 
@@ -200,7 +200,7 @@ Here is the book dump instructions：
   * order quantity or amount changes
   * order is finished
 
-#### Merged Depth Stream
+### Merged Depth Stream
 
 ```javascript
 {
@@ -251,7 +251,7 @@ Here is the book dump instructions：
 }
 ```
 
-#### Diff. Depth Stream
+### Diff. Depth Stream
 
 ```javascript
 {
@@ -317,7 +317,7 @@ This means that this price level is not in orderbook anymore.
 }
 ```
 
-### Index Data Stream
+## Index Data Stream
 
 This stream is for index prices gathered for options and futures.
 

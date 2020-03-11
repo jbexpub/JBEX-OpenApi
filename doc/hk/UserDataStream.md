@@ -114,7 +114,7 @@ timestamp | LONG | YES |
 
 ### 訂單更新
 
-訂單通過`executionReport`事件進行更新。詳細說明資訊請查看 [這裏](doc/Spot%20API%20CN.md)。通過將`Z`除以`z`可以找到平均價格。
+訂單通過`executionReport`事件進行更新。詳細說明資訊請查看 [這裏](Spot%20API.md)。通過將`Z`除以`z`可以找到平均價格。
 
 **Payload:**
 

@@ -84,9 +84,9 @@
 * MINUTE
 * DAY
 
-# General API
+## General API
 
-## Test connectivity
+### Test connectivity
 
 ```shell
 GET /openapi/v1/ping
@@ -106,7 +106,7 @@ NONE
 {}
 ```
 
-## Check server time
+### Check server time
 
 ```shell
 GET /openapi/v1/time
@@ -128,7 +128,7 @@ NONE
 }
 ```
 
-## Broker information
+### Broker information
 
 ```shell
 GET /openapi/v1/brokerInfo
@@ -191,9 +191,9 @@ NONE
 }
 ```
 
-# Market Data API
+## Market Data API
 
-## Order book
+### Order book
 
 ```shell
 GET /openapi/quote/v1/depth
@@ -246,7 +246,7 @@ limit | INT | NO | Default 100; max 100.
 }
 ```
 
-## Recent trades list
+### Recent trades list
 
 ```shell
 GET /openapi/quote/v1/trades
@@ -277,7 +277,7 @@ limit | INT | NO | Default 500; max 1000.
 ]
 ```
 
-## Kline/Candlestick data
+### Kline/Candlestick data
 
 ```shell
 GET /openapi/quote/v1/klines
@@ -321,7 +321,7 @@ limit | INT | NO | Default 500; max 1000.
 ]
 ```
 
-## 24hr ticker price change statistics
+### 24hr ticker price change statistics
 
 ```shell
 GET /openapi/quote/v1/ticker/24hr
@@ -372,7 +372,7 @@ OR
 ]
 ```
 
-## Symbol price ticker
+### Symbol price ticker
 
 ```shell
 GET /openapi/quote/v1/ticker/price
@@ -414,7 +414,7 @@ OR
 ]
 ```
 
-## Symbol order book ticker
+### Symbol order book ticker
 
 ```shell
 GET /openapi/quote/v1/ticker/bookTicker
@@ -466,9 +466,9 @@ OR
 ]
 ```
 
-# Account API
+## Account API
 
-## New order  (TRADE)
+### New order  (TRADE)
 
 ```shell
 POST /openapi/v1/order  (HMAC SHA256)
@@ -529,7 +529,7 @@ Trigger order price rules against market price for both MARKET and LIMIT version
 }
 ```
 
-## Test new order (TRADE)
+### Test new order (TRADE)
 
 ```shell
 POST /openapi/v1/order/test (HMAC SHA256)
@@ -551,7 +551,7 @@ Same as `POST /openapi/v1/order`
 {}
 ```
 
-## Query order (USER_DATA)
+### Query order (USER_DATA)
 
 ```shell
 GET /openapi/v1/order (HMAC SHA256)
@@ -600,7 +600,7 @@ Notes:
 }
 ```
 
-## Cancel order (TRADE)
+### Cancel order (TRADE)
 
 ```shell
 DELETE /openapi/v1/order  (HMAC SHA256)
@@ -633,7 +633,7 @@ Either `orderId` or `clientOrderId` must be sent.
 }
 ```
 
-## Current open orders (USER_DATA)
+### Current open orders (USER_DATA)
 
 ```shell
 GET /openapi/v1/openOrders  (HMAC SHA256)
@@ -684,7 +684,7 @@ timestamp | LONG | YES |
 ]
 ```
 
-## History orders (USER_DATA)
+### History orders (USER_DATA)
 
 ```shell
 GET /openapi/v1/historyOrders (HMAC SHA256)
@@ -737,7 +737,7 @@ timestamp | LONG | YES |
 ]
 ```
 
-## Account information (USER_DATA)
+### Account information (USER_DATA)
 
 ```shell
 GET /openapi/v1/account (HMAC SHA256)
@@ -778,7 +778,7 @@ timestamp | LONG | YES |
 }
 ```
 
-## Account trade list (USER_DATA)
+### Account trade list (USER_DATA)
 
 ```shell
 GET /openapi/v1/myTrades  (HMAC SHA256)
@@ -828,7 +828,7 @@ timestamp | LONG | YES |
 ]
 ```
 
-## Account deposit list (USER_DATA)
+### Account deposit list (USER_DATA)
 
 ```shell
 GET /openapi/v1/depositOrders  (HMAC SHA256)
@@ -871,7 +871,7 @@ timestamp | LONG | YES |
 ]
 ```
 
-## Sub-account list(SUB_ACCOUNT_LIST)
+### Sub-account list(SUB_ACCOUNT_LIST)
 
 ```shell
 POST /openapi/v1/subAccount/query
@@ -917,7 +917,7 @@ None
 ]
 ```
 
-## Internal Account Transfer (ACCOUNT_TRANSFER)
+### Internal Account Transfer (ACCOUNT_TRANSFER)
 
 ```shell
 POST /openapi/v1/transfer
@@ -956,7 +956,7 @@ amount | STRING | YES | Transfer amount
 3. **Sub-account API only supports transferring from current account to the main-account. Therefore `fromAccountType\fromAccountIndex\toAccountType\toAccountIndex` should be left empty.**
 
 
-## Check Balance Flow (BALANCE_FLOW)
+### Check Balance Flow (BALANCE_FLOW)
 
 ```shell
 POST /openapi/v1/balance_flow
@@ -1041,11 +1041,11 @@ Campaign|REGISTER_BONUS|69|Registration reward
 Campaign|AIRDROP|70|Airdrop
 Campaign|MINE_REWARD|71|Mining reward
 
-# User data stream API
+## User data stream API
 
 Specifics on how user data streams work is in another document.
 
-## Start user data stream (USER_STREAM)
+### Start user data stream (USER_STREAM)
 
 ```shell
 POST /openapi/v1/userDataStream
@@ -1071,7 +1071,7 @@ timestamp | LONG | YES |
 }
 ```
 
-## Keepalive user data stream (USER_STREAM)
+### Keepalive user data stream (USER_STREAM)
 
 ```shell
 PUT /openapi/v1/userDataStream
@@ -1096,7 +1096,7 @@ timestamp | LONG | YES |
 {}
 ```
 
-## Close user data stream (USER_STREAM)
+### Close user data stream (USER_STREAM)
 
 ```shell
 DELETE /openapi/v1/userDataStream
@@ -1121,14 +1121,14 @@ timestamp | LONG | YES |
 {}
 ```
 
-# Filters
+## Filters
 
 Filters define trading rules on a symbol or an broker.
 Filters come in two forms: `symbol filters` and `broker filters`.
 
-## Symbol filters
+### Symbol filters
 
-### PRICE_FILTER
+#### PRICE_FILTER
 
 The `PRICE_FILTER` defines the `price` rules for a symbol. There are 3 parts:
 
@@ -1153,7 +1153,7 @@ In order to pass the `price filter`, the following must be true for `price`/`sto
   }
 ```
 
-### LOT_SIZE
+#### LOT_SIZE
 
 The `LOT_SIZE` filter defines the `quantity` (aka "lots" in auction terms) rules for a symbol. There are 3 parts:
 
@@ -1178,7 +1178,7 @@ In order to pass the `lot size`, the following must be true for `quantity`/`iceb
   }
 ```
 
-### MIN_NOTIONAL
+#### MIN_NOTIONAL
 
 The `MIN_NOTIONAL` filter defines the minimum notional value allowed for an order on a symbol.
 An order's notional value is the `price` * `quantity`.
@@ -1192,7 +1192,7 @@ An order's notional value is the `price` * `quantity`.
   }
 ```
 
-### MAX_NUM_ORDERS
+#### MAX_NUM_ORDERS
 
 The `MAX_NUM_ORDERS` filter defines the maximum number of orders an account is allowed to have open on a symbol.
 Note that both "algo" orders and normal orders are counted for this filter.
@@ -1206,7 +1206,7 @@ Note that both "algo" orders and normal orders are counted for this filter.
   }
 ```
 
-### MAX_NUM_ALGO_ORDERS
+#### MAX_NUM_ALGO_ORDERS
 
 The `MAX_ALGO_ORDERS` filter defines the maximum number of "algo" orders an account is allowed to have open on a symbol.
 "Algo" orders are `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
@@ -1220,7 +1220,7 @@ The `MAX_ALGO_ORDERS` filter defines the maximum number of "algo" orders an acco
   }
 ```
 
-### ICEBERG_PARTS
+#### ICEBERG_PARTS
 
 The `ICEBERG_PARTS` filter defines the maximum parts an iceberg order can have. The number of `ICEBERG_PARTS` is defined as `CEIL(qty / icebergQty)`.
 
@@ -1233,9 +1233,9 @@ The `ICEBERG_PARTS` filter defines the maximum parts an iceberg order can have. 
   }
 ```
 
-## Broker Filters
+### Broker Filters
 
-### BROKER_MAX_NUM_ORDERS
+#### BROKER_MAX_NUM_ORDERS
 
 The `MAX_NUM_ORDERS` filter defines the maximum number of orders an account is allowed to have open on the broker.
 Note that both "algo" orders and normal orders are counted for this filter.
@@ -1249,7 +1249,7 @@ Note that both "algo" orders and normal orders are counted for this filter.
   }
 ```
 
-### BROKER_MAX_NUM_ALGO_ORDERS
+#### BROKER_MAX_NUM_ALGO_ORDERS
 
 The `MAX_ALGO_ORDERS` filter defines the maximum number of "algo" orders an account is allowed to have open on the broker.
 "Algo" orders are `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.

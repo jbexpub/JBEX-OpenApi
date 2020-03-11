@@ -2,28 +2,28 @@
 
 Broker Open API的地址請見[這裏](endpoint.md)
 
-# 公共接口
+## 公共接口
 
-## `brokerInfo`
+### `brokerInfo`
 
 獲取當前broker的交易規則和合約symbol的資訊（精度單位等資訊），包括合約的風險限額和乘數等資訊。
 
-### **Request Weight:**
+#### **Request Weight:**
 
 0
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/v1/brokerInfo
 ```
 
-### **Parameters：**
+#### **Parameters：**
 
 名稱|類型|是否強制|默認|描述
 ------------ | ------------ | ------------ | ------------ | ----
 `type`|string|`NO`|| 交易類型，支持的類型現為`token`（幣幣）、`options`（期權）、`contracts`（合約）。如果沒有發送此參數，所有交易類型的symbol資訊都會被返回。
 
-### **Response:**
+#### **Response:**
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `timezone`|string|`UTC`|時間戳的時區。
@@ -75,7 +75,7 @@ GET /openapi/v1/brokerInfo
 `initialMargin`|float|`0.1`|初始保證金率。
 `maintMargin`|float|`0.03`|最小維持保證金率。
 
-### **Example:**
+#### **Example:**
 ```js
 {
 "timezone":"UTC",
@@ -157,18 +157,18 @@ GET /openapi/v1/brokerInfo
 }
 ```
 
-<!-- ## `insurance` **(PENDING)**
+<!-- ### `insurance` **(PENDING)**
 獲取當前保險基金資訊。
 
-### **Request Weight:**
+#### **Request Weight:**
 0
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/contract/v1/insurance
 ```
 
-### **Parameters：**
+#### **Parameters：**
 名稱|類型|是否強制|默認|描述
 ------------ | ------------ | ------------ | ------------ | ------------
 `symbol`|string|`NO`||Input specific symbol to return the corresponding records. If not entered, records for all symbols will be returned.
@@ -176,7 +176,7 @@ GET /openapi/contract/v1/insurance
 `toId`|long|`NO`||pagination, return record which id > toId. If toId is given, toId cannot be 0.
 `limit`|integer|`NO`|20|Number of entries returned.
 
-### **Response:**
+#### **Response:**
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `id`|long|`1552272184833`|The ID of the record.
@@ -197,29 +197,29 @@ GET /openapi/contract/v1/insurance
 }
 ``` -->
 
-## `index`
+### `index`
 
 標的指數價格
 
-### **Request Weight:**
+#### **Request Weight:**
 0
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/quote/v1/contract/index
 ```
-### **Parameters：**
+#### **Parameters：**
 名稱|類型|是否強制|默認|描述
 ------------ | ------------ | ------------ | ------------ | ----
 symbol|string|`NO`||標的指數名稱。如果這個沒有發送，所有標的指數的價格都會被返回。
 
-### **Response:**
+#### **Response:**
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `index`|float|`8342.73`|標的指數的價格。
 `EDP`|float|`8432.32`|標的指數的EDP(預估交割價，過去10分鐘指數價格的平均值）。
 
-### **Example:**
+#### **Example:**
 ```js
 {
 "index":{
@@ -237,19 +237,19 @@ symbol|string|`NO`||標的指數名稱。如果這個沒有發送，所有標的
 }
 ```
 
-## `fundingRate`
+### `fundingRate`
 
 獲取當前資金費率 (*歷史資金費率正在建設*)
 
-### **Request Weight:**
+#### **Request Weight:**
 0
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/contract/v1/fundingRate
 ```
 
-### **Parameters：**
+#### **Parameters：**
 名稱|類型|是否強制|默認|描述
 ------------ | ------------ | ------------ | ------------ | ----
 `symbol`|string|`NO`||合約名稱。如果沒有發送該參數，所有合約的資金費率都會被返回。
@@ -258,7 +258,7 @@ GET /openapi/contract/v1/fundingRate
 `to`|long|`NO`||結束時間戳。
 `limit`|integer|`NO`|`20`| 返回條數。
 
-### **Response:**
+#### **Response:**
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `symbol`|string|`BTC-PERP-REV`|合約名稱。
@@ -266,7 +266,7 @@ GET /openapi/contract/v1/fundingRate
 `intervalEnd`|long|`1554710400000`|本次結算結束時間。
 `rate`|float|`0.00321`|該次結算資金費率。
 
-### **Example:**
+#### **Example:**
 
 ```js
 [
@@ -278,11 +278,11 @@ GET /openapi/contract/v1/fundingRate
 ]
 ```
 
-## `depth`
+### `depth`
 
 獲取當前訂單簿的數據。
 
-### **Request Weight:**
+#### **Request Weight:**
 
 根據數量會不一樣，請求數量越多，重量越大:
 
@@ -292,18 +292,18 @@ GET /openapi/contract/v1/fundingRate
 500|5
 1000|10
 
-### **Request Url:**
+#### **Request Url:**
 ```
 GET /openapi/quote/v1/contract/depth
 ```
 
-### **Parameters:**
+#### **Parameters:**
 名稱|類型|是否強制|默認|描述
 ------------ | ------------ | ------------ | ------------ | -----
 `symbol`|string|`YES`||用來獲取訂單簿的合約名稱。
 `limit`|integer|`NO`|`100` (max = 100)|返回`bids`和`asks`的數量
 
-### **Response:**
+#### **Response:**
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `time`|long|`1550829103981`|當前時間（Unix Timestamp，毫秒ms）
@@ -317,7 +317,7 @@ GET /openapi/quote/v1/contract/depth
 `''`|float|`123.10`|價格
 `''`|float|`300`|當前價格對應的數量
 
-### **Example:**
+#### **Example:**
 
 ```js
 {
@@ -354,25 +354,25 @@ GET /openapi/quote/v1/contract/depth
 
 ```
 
-## `trades`
+### `trades`
 
 獲取某個合約最近成交訂單的資訊。
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request URL:**
+#### **Request URL:**
 ```
 GET /openapi/quote/v1/contract/trades
 ```
-### **Parameters：**
+#### **Parameters：**
 名稱|類型|是否強制|默認|描述
 ------------ | ------------ | ------------ | ------------ | ------
 `symbol`|string|`YES`||合約名稱
 `limit`|integer|`NO` (最大值為1000)|`100`|返回成交訂單的數量
 
-### **Response:**
+#### **Response:**
 
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
@@ -381,7 +381,7 @@ GET /openapi/quote/v1/contract/trades
 `qty`|float|`5`|數量（張數）
 `isBuyerMaker`|string|`true`|賣方還是買方。`true`=賣方，`false`=買方
 
-### **Example:**
+#### **Example:**
 ```js
 [
 {
@@ -393,20 +393,20 @@ GET /openapi/quote/v1/contract/trades
 ]
 ```
 
-## `klines`
+### `klines`
 
 獲取某個合約的K線資訊（高，低，開，收，交易量...)
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request URL:**
+#### **Request URL:**
 ```
 GET /openapi/quote/v1/contract/klines
 ```
 
-### **Parameters：**
+#### **Parameters：**
 | 名稱|類型|是否強制|默認|描述 |
 | ------------ | ------------ | ------------ | ------------ | ---- |
 `symbol`|string|`YES`||合約名稱
@@ -414,7 +414,7 @@ GET /openapi/quote/v1/contract/klines
 `limit`|integer|`NO`|`1000`|返回值的數量，最大值為1000
 `to`|integer|`NO`||最後一個數據點的時間戳
 
-### **Response:**
+#### **Response:**
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `''`|long|`1538728740000`|開始時間戳，毫秒（ms）
@@ -429,7 +429,7 @@ GET /openapi/quote/v1/contract/klines
 `''`|float|`1756.87402397`|買方購買金額
 `''`|float|`28.46694368`|買方購買數量（張數）
 
-### **Example:**
+#### **Example:**
 ```js
 [
 [
@@ -451,22 +451,22 @@ GET /openapi/quote/v1/contract/klines
 
 `quote asset` 代表該數量的token用來獲得合約
 
-# 私有接口
+## 私有接口
 
-## `order`
+### `order`
 
 合約下單，這個端點需要簽名訪問。
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request URL:**
+#### **Request URL:**
 ```bash
 POST /openapi/contract/v1/order
 ```
 
-### **Parameters：**
+#### **Parameters：**
 名稱|類型|是否強制|默認|描述
 ------------ | ------------ | ------------ | ------------ | ------------
 `symbol`|string|`YES`||合約名稱。
@@ -488,7 +488,7 @@ POST /openapi/contract/v1/order
 
 對於 *價格類型* 和 *訂單類型* 的詳細解釋，請參見文末。
 
-### **Response:**
+#### **Response:**
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `time`|long|`1570759718825`|訂單生成時的時間戳
@@ -509,7 +509,7 @@ POST /openapi/contract/v1/order
 `timeInForce`|string|`GTC`|時效單（Time in Force)類型(`GTC`、`FOK`、`IOC`、`LIMIT_MAKER`)
 `fees`|||訂單的手續費
 
-### **Example:**
+#### **Example:**
 ```js
 {
 'time': '1570759718825',
@@ -532,20 +532,20 @@ POST /openapi/contract/v1/order
 }
 ```
 
-## `cancel`
+### `cancel`
 
 取消某個訂單，需要發送`orderId`或者`clientOrderId`其中之一。這個API端點需要你的請求簽名。
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 DELETE /openapi/contract/v1/order/cancel
 ```
 
-### **Parameter:**
+#### **Parameter:**
 
 名稱|類型|是否強制|默認|描述
 ------------ | ------------ | ------------ | ------------ | -----
@@ -555,7 +555,7 @@ DELETE /openapi/contract/v1/order/cancel
 
 **注意：**` orderId` 或者 `clientOrderId` **必須發送其中之一**
 
-### **Response:**
+#### **Response:**
 
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
@@ -584,7 +584,7 @@ DELETE /openapi/contract/v1/order/cancel
 `feeToken`|string|`USDT`|手續費計價類型
 `fee`|float|`0`|實際手續費
 
-### **Example:**
+#### **Example:**
 
 ```js
 {
@@ -608,31 +608,31 @@ DELETE /openapi/contract/v1/order/cancel
 }
 ```
 
-### `batchCancel`
+#### `batchCancel`
 
 批量撤銷訂單(**正在建設中: 計畫委托的批量撤單**)
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 DELETE /openapi/contract/v1/order/batchCancel
 ```
-### **Parameter:**
+#### **Parameter:**
 
 名稱|類型|是否強制|默認|描述
 ------------ | ------------ | ------------ | ------------ | -----
 `symbol`|string/list|`NO`||合約名稱（或者用`,`分割的合約名稱的list）
 
-### **Response:**
+#### **Response:**
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `message`|string|`success`|撤單請求的返回消息
 `timestamp`|long|`1541161088303`|返回時的時間戳
 
-### **Example:**
+#### **Example:**
 
 ```js
 {
@@ -641,20 +641,20 @@ DELETE /openapi/contract/v1/order/batchCancel
 }
 ```
 
-### `openOrders`
+#### `openOrders`
 
 未完成委託，這個API端點需要請求簽名。
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/contract/v1/openOrders
 ```
 
-### **Parameters:**
+#### **Parameters:**
 名稱|類型|是否強制|默認|描述
 ------------ | ------------ | ------------ | ------------ | --------
 `symbol`|string|`NO`||合約名稱。如果沒有在請求裏發送，所有合約的未完成委託都會被返回。
@@ -665,7 +665,7 @@ GET /openapi/contract/v1/openOrders
 
 如果發送了`orderId`，會返回所有< `orderId`的訂單。如果沒有則會返回最新的未完成訂單。
 
-### **Response:**
+#### **Response:**
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `time`|long|`1570759718825`|訂單生成時的時間戳
@@ -693,7 +693,7 @@ GET /openapi/contract/v1/openOrders
 `feeToken`|string|`USDT`|手續費計價類型
 `fee`|float|`0`|實際手續費
 
-### **Example:**
+#### **Example:**
 
 ```js
 [
@@ -719,20 +719,20 @@ GET /openapi/contract/v1/openOrders
 ]
 ```
 
-## `historyOrders`
+### `historyOrders`
 
 Retrieves history of orders that have been partially or fully filled or canceled. This API endpoint requires your request to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/contract/v1/historyOrders
 ```
 
-### **Parameters:**
+#### **Parameters:**
 名稱|類型|是否強制|默認|描述
 ------------ | ------------ | ------------ | ------------ | --------
 `symbol`|string|`NO`||Symbol to return open orders for. If not sent, orders of all contracts will be returned.
@@ -743,7 +743,7 @@ GET /openapi/contract/v1/historyOrders
 
 If `orderId` is set, it will get orders < that `orderId`. Otherwise most recent orders are returned.
 
-### **Response:**
+#### **Response:**
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `time`|long|`1570759718825`|訂單生成時的時間戳
@@ -771,7 +771,7 @@ If `orderId` is set, it will get orders < that `orderId`. Otherwise most recent 
 `feeToken`|string|`USDT`|手續費計價類型
 `fee`|float|`0`|實際手續費
 
-### **Example:**
+#### **Example:**
 
 ```js
 [
@@ -797,20 +797,20 @@ If `orderId` is set, it will get orders < that `orderId`. Otherwise most recent 
 ]
 ```
 
-## `getOrder`
+### `getOrder`
 
 獲取某個訂單的詳細資訊
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/contract/v1/getOrder
 ```
 
-### **Parameters:**
+#### **Parameters:**
 名稱|類型|是否強制|默認|描述
 ------------ | ------------ | ------------ | ------------ | --------
 `orderId`|integer|`NO`||訂單ID
@@ -819,7 +819,7 @@ GET /openapi/contract/v1/getOrder
 
 **注意：**` orderId` 或者 `clientOrderId` **必須發送其中之一**
 
-### **Response:**
+#### **Response:**
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `time`|long|`1570759718825`|訂單生成時的時間戳
@@ -847,7 +847,7 @@ GET /openapi/contract/v1/getOrder
 `feeToken`|string|`USDT`|手續費計價類型
 `fee`|float|`0`|實際手續費
 
-### **Example:**
+#### **Example:**
 
 ```js
 {
@@ -871,19 +871,19 @@ GET /openapi/contract/v1/getOrder
 }
 ```
 
-## `myTrades`
+### `myTrades`
 返回帳戶的成交歷史，這個API端點需要請求簽名。
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/contract/v1/myTrades
 ```
 
-### **Parameters:**
+#### **Parameters:**
 名稱|類型|是否強制|默認|描述
 ------------ | ------------ | ------------ | ------------ | -------
 `symbol`|string|`NO`|| 合約名稱。如果沒有發送，所有合約的成交歷史都會被返回。
@@ -892,7 +892,7 @@ GET /openapi/contract/v1/myTrades
 `fromId`|integer|`NO`||從TradeId開始（用來查詢成交訂單）
 `toId`|integer|`NO`||到TradeId結束（用來查詢成交訂單）
 
-### **Response:**
+#### **Response:**
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `time`|long|`1551062936784`|訂單生成是的時間戳
@@ -907,7 +907,7 @@ GET /openapi/contract/v1/myTrades
 `side`|string|`BUY`|訂單方向（`BUY_OPEN`、`SELL_OPEN`、`BUY_CLOSE`、`SELL_CLOSE`）
 `orderType`|string|`LIMIT`|訂單類型（`LIMIT`、`MARKET`)
 
-### **Example:**
+#### **Example:**
 
 ```js
 [
@@ -928,26 +928,26 @@ GET /openapi/contract/v1/myTrades
 ]
 ```
 
-## `positions`
+### `positions`
 
 返回現在的倉位資訊，這個API需要請求簽名。
 
-### **Request Weight:**
+#### **Request Weight:**
 
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/contract/v1/positions
 ```
 
-### **Parameters:**
+#### **Parameters:**
 名稱|類型|是否強制|默認|描述
 ------------ | ------------ | ------------ | ------------ | --------
 `symbol`|string|`NO`||合約名稱。如果沒有發送，所有的合約倉位資訊都會被返回。
 `side`|string|`NO`|| 倉位方向，`LONG`（多倉）或者`SHORT`（空倉）。如果沒有發送，兩個方向的倉位資訊都會被返回。
 
-### **Response:**
+#### **Response:**
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `symbol`|string|`BTC-PERP-REV`|合約名稱
@@ -965,7 +965,7 @@ GET /openapi/contract/v1/positions
 `profitRate`|float|`0.0000333`|當前倉位的盈利率
 `realizedPnL`|float|`6.8`|當前 **合約** 的已實現盈虧
 
-### **Example:**
+#### **Example:**
 ```js
 [
 {
@@ -987,22 +987,22 @@ GET /openapi/contract/v1/positions
 ]
 ```
 
-## `account`
+### `account`
 
 返回合約帳戶餘額，這個端點需要請求簽名。
 
-### **Request Weight:**
+#### **Request Weight:**
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 GET /openapi/contract/v1/account
 ```
 
-### **Parameters:**
+#### **Parameters:**
 None
 
-### **Response:**
+#### **Response:**
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `total`|float|`131.06671401`|總餘額
@@ -1010,7 +1010,7 @@ None
 `positionMargin`|float|`0.01215991`|倉位保證金
 `orderMargin`|float|`0`|委託保證金（下單鎖定）
 
-### **Example:**
+#### **Example:**
 
 ```js
 {
@@ -1023,19 +1023,19 @@ None
 }
 ```
 
-## `modifyMargin`
+### `modifyMargin`
 
 更改某個合約倉位的保證金，這個端點需要請求簽名。
 
-### **Request Weight:**
+#### **Request Weight:**
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 POST /openapi/contract/v1/modifyMargin
 ```
 
-### **Parameters:**
+#### **Parameters:**
 
 名稱|類型|是否強制|默認|描述
 ------------ | ------------ | ------------ | ------------ | -------
@@ -1043,7 +1043,7 @@ POST /openapi/contract/v1/modifyMargin
 `side`|string|`YES`||倉位方向，`LONG`（多倉）或者`SHORT`（空倉）。
 `amount`|float|`YES`||增加（正值）或者減少（負值）保證金的數量。請注意這個數量指的是合約標的定價資產（即合約結算的標的）。
 
-### **Response:**
+#### **Response:**
 
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
@@ -1051,7 +1051,7 @@ POST /openapi/contract/v1/modifyMargin
 `margin`|float|`12.3`|更新後的倉位保證金
 `timestamp`|long|`1541161088303`|更新時間戳
 
-### **Example:**
+#### **Example:**
 ```js
 {
 'symbol':'BTC-PERP-REV',
@@ -1061,19 +1061,19 @@ POST /openapi/contract/v1/modifyMargin
 ```
 
 
-## `withdraw`
+### `withdraw`
 
 按提幣地址進行提幣操作。
 
-### **Request Weight:**
+#### **Request Weight:**
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 POST /openapi/account/v1/withdraw
 ```
 
-### **Parameters:**
+#### **Parameters:**
 
 名稱|類型|是否強制|默認|描述
 ------------ | ------------ | ------------ | ------------ | -------
@@ -1084,7 +1084,7 @@ POST /openapi/account/v1/withdraw
 `withdrawQuantity`|string|`YES`||提幣數量。
 `isQuick`|boolean|`YES`||true 加速提幣 false 正常提幣 礦工費不同
 
-### **Response:**
+#### **Response:**
 
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
@@ -1092,7 +1092,7 @@ POST /openapi/account/v1/withdraw
 `needBrokerAudit`|boolean|true|是否需要券商審核
 `orderId`|long|`423885103582776064`|提幣成功訂單id
 
-### **Example:**
+#### **Example:**
 ```js
 {
 "status": 0,
@@ -1105,19 +1105,19 @@ POST /openapi/account/v1/withdraw
 ```
 
 
-## `withdrawDetail`
+### `withdrawDetail`
 
 按提幣地址進行提幣操作。
 
-### **Request Weight:**
+#### **Request Weight:**
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 POST /openapi/account/v1/withdraw
 ```
 
-### **Parameters:**
+#### **Parameters:**
 
 名稱|類型|是否強制|默認|描述
 ------------ | ------------ | ------------ | ------------ | -------
@@ -1128,7 +1128,7 @@ POST /openapi/account/v1/withdraw
 `withdrawQuantity`|string|`YES`||提幣數量。
 `isQuick`|boolean|`YES`||true 加速提幣 false 正常提幣 礦工費不同
 
-### **Response:**
+#### **Response:**
 
 名稱|類型|例子|描述
 ------------ | ------------ | ------------ | ------------
@@ -1136,7 +1136,7 @@ POST /openapi/account/v1/withdraw
 `needBrokerAudit`|boolean|true|是否需要券商審核
 `orderId`|long|`423885103582776064`|提幣成功訂單id
 
-### **Example:**
+#### **Example:**
 ```js
 {
 "status": 0,
@@ -1148,20 +1148,20 @@ POST /openapi/account/v1/withdraw
 }
 ```
 
-<!-- ## `transfer` **(PENDING)**
+<!-- ### `transfer` **(PENDING)**
 
 This endpoint is used to transfer funds across different accounts. This endpoint requires
 you to be signed.
 
-### **Request Weight:**
+#### **Request Weight:**
 1
 
-### **Request Url:**
+#### **Request Url:**
 ```bash
 POST /openapi/v1/transfer
 ```
 
-### **Parameters:**
+#### **Parameters:**
 
 名稱|類型|是否強制|默認|描述
 ------------ | ------------ | ------------ | ------------ | -------
@@ -1172,11 +1172,11 @@ POST /openapi/v1/transfer
 
 Currently supports transferring assets across `wallet`, `option`, and `contract` accounts.
 
-### **Response:**
+#### **Response:**
 
 A confirmation message will be returned.
 
-### **Example:**
+#### **Example:**
 
 ```js
 {
@@ -1185,9 +1185,9 @@ A confirmation message will be returned.
 }
 ``` -->
 
-## 關鍵參數解釋說明:
+### 關鍵參數解釋說明:
 
-### `side`
+#### `side`
 
 交易的方向
 
@@ -1199,7 +1199,7 @@ A confirmation message will be returned.
 
 `BUY_CLOSE`: 平空倉
 
-### `priceType`
+#### `priceType`
 
 價格類型
 
@@ -1221,7 +1221,7 @@ A confirmation message will be returned.
 
 假設你開多10張合約，最新成交價為10，你將會下10張（10*1.05=)10.5的買單。
 
-### `timeInForce`
+#### `timeInForce`
 
 時效單類型。
 
@@ -1233,7 +1233,7 @@ A confirmation message will be returned.
 
 `LIMIT_MAKER`: 如果訂單會馬上成交，訂單會被撤銷。
 
-### `orderType`
+#### `orderType`
 
 訂單類型
 

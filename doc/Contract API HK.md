@@ -1,8 +1,8 @@
-# Broker API URL
+# 合約交易
 
 Broker Open API的地址請見[這裏](endpoint.md)
 
-# Broker 合約公共端點
+# 公共接口
 
 ## `brokerInfo`
 
@@ -451,7 +451,7 @@ GET /openapi/quote/v1/contract/klines
 
 `quote asset` 代表該數量的token用來獲得合約
 
-# Private Endpoints
+# 私有接口
 
 ## `order`
 

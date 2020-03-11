@@ -1,8 +1,8 @@
-# Base URL
+# Options
 
 The base url of broker open API can be found [here](endpoint.md)
 
-# Public Options Endpoints
+# Public API 
 
 ## `brokerInfo`
 
@@ -352,7 +352,7 @@ name|type|example|description
 
 `quote asset` refers to the asset that is the price of a symbol.
 
-# Private Options Endpoints
+# Private API
 
 ## `order`
 

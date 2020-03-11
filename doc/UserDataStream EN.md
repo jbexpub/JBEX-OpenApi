@@ -1,5 +1,4 @@
-# User Data Streams for Broker
-=======
+# User Data Stream
 
 ## General WSS information
 
@@ -8,9 +7,9 @@
 * Doing a `DELETE` on a `listenKey` will close the stream.
 * User Data Streams are accessed at **/openapi/ws/\<listenKey\>**
 * A single connection to api endpoint is only valid for 24 hours; expect to be disconnected at the 24 hour mark
-* User data stream payloads are **not guaranteed** to be in order during heavy periods; **make sure to order your updates using E**
+* User data stream payloads are **not guaranteed** to be in order during heavy periods; **make sure to order your updates using Event**
 
-## API Endpoints
+## User Data Stream API
 
 ### Create a listenKey
 

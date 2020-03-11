@@ -1,4 +1,4 @@
-# Error codes for JBEX Broker (2020-01-25)
+# Error Codes
 
 Errors consist of two parts: an error code and a message. Codes are universal,
  but messages can vary. Here is the error JSON payload:
@@ -229,7 +229,6 @@ Errors consist of two parts: an error code and a message. Codes are universal,
 ### -1147 ORDER_CANCELLATION_TIMEOUT
 
 * Order cancellation timeout
-
 
 ### -2010 NEW_ORDER_REJECTED
 

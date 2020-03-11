@@ -1,8 +1,8 @@
-# Broker API URL
+# 期權交易
 
 Broker Open API的地址請見[這裏](endpoint.md)
 
-# 期權公共端點
+# 公共接口
 
 ## `brokerInfo`
 
@@ -346,7 +346,7 @@ GET /openapi/quote/v1/option/klines
 ]
 ```
 
-# 個人期權端點
+# 私有接口
 
 ## `order`
 

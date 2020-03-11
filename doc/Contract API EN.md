@@ -1,7 +1,8 @@
-# Base Url
+# Contract
+
 The base url of broker open API can be found [here](doc/endpoint.md)
 
-# Broker Contract Public Endpoint
+# Public API
 
 ## `brokerInfo`
 
@@ -459,7 +460,7 @@ name|type|example|description
 
 `quote asset` means the amount of tokens paid to acquire the contracts.
 
-# Private Endpoints
+# Private API 
 
 ## `order`
 

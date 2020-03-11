@@ -1,4 +1,4 @@
-# Web Socket Streams for bBoker (2020-01-25)
+# Web Socket
 
 ## General WSS information
 
